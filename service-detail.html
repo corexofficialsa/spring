@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pg-title">Service — Springs Advertising LLC</title>
+<meta name="description" content="Springs Advertising LLC — professional signage services in Abu Dhabi since 1977.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,600;0,700;1,400&family=Urbanist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;--bg2:#f7f5f1;--bg3:#edeae4;
+  --text:#111111;--text2:#3d3d3d;--muted:#888888;
+  --border:rgba(0,0,0,0.09);
+  --red:#c01e2a;--navy:#1c3461;--teal:#019a98;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Urbanist',sans-serif;font-weight:400;line-height:1.75;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* LOADER */
+#loader{position:fixed;inset:0;background:#fff;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transition:opacity .5s ease,visibility .5s ease}
+#loader.done{opacity:0;visibility:hidden;pointer-events:none}
+.ld-logo{display:flex;align-items:center;gap:14px}
+.ld-icon{width:52px;height:52px;background:var(--navy);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ld-text-wrap .ld-arabic{font-size:10px;color:var(--navy);font-family:serif;display:block;margin-bottom:2px}
+.ld-text-wrap .ld-spring{font-family:'Urbanist',sans-serif;font-weight:700;font-size:22px;letter-spacing:.08em;color:var(--red);line-height:1;display:block}
+.ld-text-wrap .ld-adv{font-size:9px;letter-spacing:.35em;color:var(--navy);display:block;margin-top:1px}
+.ld-bar{width:80px;height:2px;background:rgba(0,0,0,0.08);overflow:hidden;border-radius:2px}
+.ld-fill{height:100%;background:var(--red);width:0;animation:ldFill .5s ease forwards}
+@keyframes ldFill{to{width:100%}}
+
+/* PROGRESS */
+#progress{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--red);z-index:9999;pointer-events:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(1.5rem,5vw,4rem);height:76px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--border)}
+.nav-logo{display:flex;align-items:center;flex-shrink:0}
+.nav-logo img{height:48px;width:auto;object-fit:contain;display:block}
+.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
+.nav-links a{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);position:relative;transition:color .3s;font-weight:500}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--red);transition:width .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--red)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 2rem;border-radius:8px;font-family:'Urbanist',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:none;position:relative;transition:all .3s;text-decoration:none}
+.btn:hover{transform:translateY(-2px)}
+.btn-p{background:var(--red);color:#fff;box-shadow:0 4px 20px rgba(192,30,42,.25)}
+.btn-p:hover{background:#a8181f}
+.btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--border)}
+.btn-ghost:hover{border-color:var(--navy)}
+.hbg{display:none;flex-direction:column;gap:5px;width:24px;background:none;border:none;padding:0;z-index:1001;cursor:pointer}
+.hbg span{display:block;width:100%;height:1.5px;background:var(--text);transition:all .4s cubic-bezier(.23,1,.32,1);transform-origin:center}
+.hbg.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hbg.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hbg.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mob-menu{position:fixed;inset:0;z-index:999;background:var(--navy);clip-path:circle(0% at calc(100% - 44px) 44px);transition:clip-path .7s cubic-bezier(.77,0,.175,1);display:flex;flex-direction:column;justify-content:center;padding:clamp(2rem,8vw,5rem);overflow:hidden}
+.mob-menu.open{clip-path:circle(160% at calc(100% - 44px) 44px)}
+.mob-links{list-style:none;margin-bottom:3rem}
+.mob-links li{overflow:hidden}
+.mob-links a{display:block;font-family:'Cormorant Garant',serif;font-weight:700;font-size:clamp(2.5rem,9vw,5rem);color:rgba(255,255,255,.3);line-height:1.1;padding:.15em 0;transform:translateY(110%);transition:transform .6s cubic-bezier(.23,1,.32,1),color .3s}
+.mob-menu.open .mob-links a{transform:translateY(0)}
+.mob-links li:nth-child(1) a{transition-delay:.1s}.mob-links li:nth-child(2) a{transition-delay:.16s}.mob-links li:nth-child(3) a{transition-delay:.22s}.mob-links li:nth-child(4) a{transition-delay:.28s}.mob-links li:nth-child(5) a{transition-delay:.34s}.mob-links li:nth-child(6) a{transition-delay:.40s}
+.mob-links a:hover{color:#fff}
+.mob-contact{opacity:0;transition:opacity .4s .4s;font-size:.85rem;color:rgba(255,255,255,.5);display:flex;flex-direction:column;gap:.4rem}
+.mob-menu.open .mob-contact{opacity:1}
+
+/* SCROLL REVEAL */
+.rev{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.23,1,.32,1)}
+.rev.in{opacity:1;transform:translateY(0)}
+.rv-l{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s cubic-bezier(.23,1,.32,1)}
+.rv-l.in{opacity:1;transform:translateX(0)}
+.rv-r{opacity:0;transform:translateX(30px);transition:opacity .7s ease,transform .7s cubic-bezier(.23,1,.32,1)}
+.rv-r.in{opacity:1;transform:translateX(0)}
+.d1{transition-delay:.1s}
+
+/* LABEL */
+.label{display:inline-flex;align-items:center;gap:.6rem;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:1rem}
+.label::before{content:'';width:24px;height:1.5px;background:var(--red)}
+
+/* PAGE HEADER */
+.pg-header{padding-top:76px;background:var(--navy);position:relative;overflow:hidden;min-height:340px;display:flex;align-items:flex-end}
+.pg-header-img{position:absolute;inset:0;object-fit:cover;opacity:.2}
+.pg-header-content{position:relative;z-index:1;padding:clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,4rem);max-width:1200px;width:100%}
+.pg-breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1rem}
+.pg-breadcrumb a{color:rgba(255,255,255,.4);transition:color .3s}
+.pg-breadcrumb a:hover{color:rgba(255,255,255,.8)}
+.pg-breadcrumb span{color:rgba(255,255,255,.25)}
+.pg-header-h{font-family:'Cormorant Garant',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#fff;line-height:.95;letter-spacing:-.02em}
+.pg-header-tag{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:.75rem}
+
+/* SERVICE DETAIL */
+#svc-detail{padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem);background:var(--bg)}
+.svc-g{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;max-width:1200px;margin:0 auto}
+.svc-name{font-family:'Cormorant Garant',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:var(--navy);line-height:1.05;letter-spacing:-.02em;margin-bottom:.75rem}
+.svc-tagline{font-size:.85rem;letter-spacing:.08em;color:var(--muted);margin-bottom:1.75rem;text-transform:uppercase}
+.svc-desc{color:var(--text2);font-size:.97rem;line-height:1.95;margin-bottom:2rem}
+.svc-list{list-style:none;display:flex;flex-direction:column;gap:0;margin-bottom:2rem;border-top:1px solid var(--border)}
+.svc-list li{padding:.75rem 0;border-bottom:1px solid var(--border);font-size:.9rem;color:var(--text2);display:flex;align-items:center;gap:.75rem}
+.svc-list li::before{content:'';width:4px;height:4px;background:var(--red);border-radius:50%;flex-shrink:0}
+.svc-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.svc-img-wrap{border-radius:16px;overflow:hidden;height:520px;position:sticky;top:96px}
+
+/* OTHER SERVICES */
+#other-svcs{padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem);background:var(--bg2)}
+.os-head{max-width:1200px;margin:0 auto 2.5rem}
+.os-title{font-family:'Cormorant Garant',serif;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:700;color:var(--navy)}
+.os-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1200px;margin:0 auto}
+.os-card{border-radius:14px;overflow:hidden;background:var(--bg);box-shadow:0 4px 24px rgba(0,0,0,0.06);transition:transform .35s ease,box-shadow .35s ease;display:flex;flex-direction:column}
+.os-card:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(0,0,0,0.1)}
+.os-card-img{height:180px;overflow:hidden}
+.os-card-img img{transition:transform .6s ease}
+.os-card:hover .os-card-img img{transform:scale(1.05)}
+.os-card-body{padding:1.5rem;flex:1;display:flex;flex-direction:column}
+.os-card-name{font-family:'Cormorant Garant',serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.os-card-link{margin-top:auto;padding-top:1rem;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--red);font-weight:600}
+
+/* TICKER */
+.ticker{background:var(--red);overflow:hidden;padding:.8rem 0}
+.t-track{display:flex;width:max-content;animation:tick 22s linear infinite}
+.t-item{white-space:nowrap;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.85);padding:0 2.5rem;font-weight:500}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* FOOTER */
+footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(1.5rem,5vw,4rem) 2rem}
+.ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:4rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:2rem}
+.ft-logo{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem}
+.ft-logo .icon{width:40px;height:40px;background:rgba(255,255,255,.1);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ft-logo .name-wrap .spring{display:block;font-family:'Urbanist',sans-serif;font-weight:700;font-size:15px;letter-spacing:.06em;color:#fff;line-height:1.1}
+.ft-logo .name-wrap .adv{display:block;font-size:7px;letter-spacing:.3em;color:rgba(255,255,255,.4);text-transform:uppercase}
+.ft-tagline{font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.7;max-width:220px}
+.ft-col-h{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:1.25rem}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.ft-links a{font-size:.88rem;color:rgba(255,255,255,.5);transition:color .3s}
+.ft-links a:hover{color:#fff}
+.ft-bottom{display:flex;justify-content:space-between;align-items:center}
+.ft-copy{font-size:.72rem;color:rgba(255,255,255,.3)}
+.ft-soc{display:flex;gap:1.25rem;align-items:center}
+.ft-soc a{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);transition:color .3s}
+.ft-soc a:hover{color:#fff}
+.ft-admin{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.2);transition:color .3s;margin-left:1.5rem;border-left:1px solid rgba(255,255,255,.1);padding-left:1.5rem}
+.ft-admin:hover{color:rgba(255,255,255,.5)}
+
+/* 404 state */
+.not-found{text-align:center;padding:6rem 2rem;max-width:600px;margin:0 auto}
+.not-found h2{font-family:'Cormorant Garant',serif;font-size:2.5rem;color:var(--navy);margin-bottom:1rem}
+.not-found p{color:var(--muted);margin-bottom:2rem}
+
+@media(max-width:1024px){.svc-g{grid-template-columns:1fr;gap:3rem}.svc-img-wrap{position:static;height:380px}.os-grid{grid-template-columns:1fr 1fr}.ft-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.nav-links{display:none}.hbg{display:flex}.os-grid{grid-template-columns:1fr}.ft-grid{grid-template-columns:1fr}.ft-bottom{flex-direction:column;gap:1rem;text-align:center}.svc-btns{flex-direction:column;width:max-content}}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <img src="logo.png" alt="Springs Advertising LLC" style="height:80px;object-fit:contain">
+  <div class="ld-bar"><div class="ld-fill"></div></div>
+</div>
+
+<div id="progress"></div>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="Springs Advertising LLC">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about-us.html">About</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="contact-us.html" class="btn btn-p" style="padding:.55rem 1.4rem;font-size:.7rem">Get a Quote</a></li>
+  </ul>
+  <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mob-menu" id="mob">
+  <ul class="mob-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about-us.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="contact-us.html">Contact</a></li>
+  </ul>
+  <div class="mob-contact"><span>info@springsadvt.com</span><span>+971 556 622 949</span></div>
+</div>
+
+<header class="pg-header" id="pg-header">
+  <img src="" alt="" class="pg-header-img" id="hdr-img">
+  <div class="pg-header-content">
+    <div class="pg-breadcrumb">
+      <a href="services.html">Services</a>
+      <span>/</span>
+      <span id="bc-name">—</span>
+    </div>
+    <h1 class="pg-header-h" id="hdr-name">—</h1>
+    <div class="pg-header-tag" id="hdr-tag"></div>
+  </div>
+</header>
+
+<section id="svc-detail">
+  <div class="svc-g">
+    <div class="rv-l">
+      <div class="label">Springs Advertising</div>
+      <h2 class="svc-name" id="svc-name">—</h2>
+      <div class="svc-tagline" id="svc-tagline"></div>
+      <p class="svc-desc" id="svc-desc"></p>
+      <ul class="svc-list" id="svc-list" style="display:none"></ul>
+      <div class="svc-btns">
+        <a href="contact-us.html" class="btn btn-p">Get a Quote</a>
+        <a href="services.html" class="btn btn-ghost">← All Services</a>
+      </div>
+    </div>
+    <div class="svc-img-wrap rv-r">
+      <img id="svc-img" src="" alt="">
+    </div>
+  </div>
+</section>
+
+<section id="other-svcs">
+  <div class="os-head rev">
+    <div class="label">Explore More</div>
+    <h2 class="os-title">Other Services</h2>
+  </div>
+  <div class="os-grid" id="os-grid"></div>
+</section>
+
+<div class="ticker">
+  <div class="t-track">
+    <span class="t-item">Signage Specialists</span><span class="t-item">·</span>
+    <span class="t-item">Est. Abu Dhabi 1977</span><span class="t-item">·</span>
+    <span class="t-item">Design · Manufacture · Install</span><span class="t-item">·</span>
+    <span class="t-item">Signage Specialists</span><span class="t-item">·</span>
+    <span class="t-item">Est. Abu Dhabi 1977</span><span class="t-item">·</span>
+    <span class="t-item">Design · Manufacture · Install</span><span class="t-item">·</span>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-grid">
+    <div>
+      <div class="ft-logo">
+        <div class="icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M2 19 C6 15, 10 11, 12 9 C14 7, 18 4, 22 2" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M2 23 C7 18, 11 14, 13 11 C15 8, 19 4, 22 2" stroke="#019a98" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="name-wrap">
+          <span class="spring">SPRING</span>
+          <span class="adv">Advertising LLC</span>
+        </div>
+      </div>
+      <p class="ft-tagline">Abu Dhabi's trusted signage manufacturer since 1977.</p>
+    </div>
+    <div>
+      <div class="ft-col-h">Navigation</div>
+      <ul class="ft-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about-us.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="admin.html" style="opacity:.45;font-size:.8rem">Admin Panel</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft-col-h">Contact</div>
+      <ul class="ft-links">
+        <li><a href="mailto:info@springsadvt.com">info@springsadvt.com</a></li>
+        <li><a href="tel:+971556622949">+971 556 622 949</a></li>
+        <li><a href="contact-us.html">Abu Dhabi, UAE</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <p class="ft-copy">© 2024 Springs Advertising LLC. All rights reserved.</p>
+    <div class="ft-soc">
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Facebook</a>
+      <a href="admin.html" class="ft-admin">Admin ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// LOADER — once per session
+const loader=document.getElementById('loader');
+if(sessionStorage.getItem('ld')){loader.style.display='none'}
+else{setTimeout(()=>{loader.classList.add('done');sessionStorage.setItem('ld','1')},500)}
+
+// PROGRESS
+window.addEventListener('scroll',()=>{const p=document.getElementById('progress');p.style.width=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%'});
+
+// MOBILE MENU
+const hbg=document.getElementById('hbg'),mob=document.getElementById('mob');
+hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mob.classList.toggle('open')});
+
+// SCROLL REVEAL
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.rev,.rv-l,.rv-r').forEach(el=>io.observe(el));
+
+// SERVICE DATA
+const SERVICES={
+  'vehicle-graphics':{name:'Vehicle Graphics',tag:'Fleet wraps · Vinyl lettering · Full vehicle branding',desc:'Full fleet wraps, partial vehicle graphics and precision-cut vinyl lettering — all UV-protected for the UAE climate. Whether branding a single vehicle or an entire fleet, our graphics are produced and installed to the highest standard. Our design team can develop your artwork, or we can work from supplied files.',img:'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=1200&h=800&fit=crop&q=80',list:null},
+  'outdoor-business-sign':{name:'Outdoor & Business Sign',tag:'Professional · Reliable · Capable',desc:'Serving high-profile clients since 1977, our skilled sign makers and qualified electricians provide on-demand service ensuring your signs are never out of action. We offer energy-efficient LED solutions and scheduled maintenance contracts, operating to full industry certification — delivering quality signage on time, every time.',img:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&h=800&fit=crop&q=80',list:null},
+  'internal-signs':{name:'Internal Signs',tag:'Creating the right impression from first contact',desc:'Internal signage is essential to a great first impression for visitors and customers. We visit on-site to discuss your brief, offer inspiration and highlight challenges before a design template is created for approval. The final product is then manufactured, delivered and installed — for one-off promotions or permanent installations.',img:'https://images.unsplash.com/photo-1497366754035-f200581393ab?w=1200&h=800&fit=crop&q=80',list:null},
+  'lettering':{name:'Lettering',tag:'Maximum impact through precision craftsmanship',desc:'Built-up lettering delivers a striking, imposing design style — subtle yet powerful, with maximum impact. Our production unit manufactures bespoke aluminium, steel, acrylic or timber lettering, carefully considering size, shape, colour and location for your brand.',img:'https://images.unsplash.com/photo-1614680376408-81e91ffe3db7?w=1200&h=800&fit=crop&q=80',list:['3D Moulded Lettering','Flat Cut Lettering','Build-Up Lettering','3D LED-Lit Lettering','Vinyl Lettering']},
+  'window-graphics':{name:'Window Graphics',tag:'Bespoke vinyl for shopfronts, offices and interiors',desc:'Vinyl window graphics give your shopfront, office or interior a bespoke, high-impact finish at an excellent cost-to-effect ratio. Available in a wide range of colours, they work for promotions and permanent brand displays alike. Supply a vector file or let our team design for you.',img:'https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=1200&h=800&fit=crop&q=80',list:null},
+  'digital-vinyl':{name:'Digital Printed Vinyl Stickers & Labels',tag:'Full-colour prints on vinyl, PVC, magnetic and more',desc:'Using modern, durable printers we produce self-adhesive vinyl, PVC and magnetic prints in mono, spot or full colour. From sequential numbered labels to corporate logos, H&S stickers and domed labels — with flexible run sizes and no large minimum orders.',img:'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1200&h=800&fit=crop&q=80',list:null},
+  'banners-flex':{name:'Banners & Flex',tag:'Wide-format digital printing for promotions and events',desc:'Wide-format digital colour printing translates any branding or imagery into eye-catching exterior signage. All banners are finished with bonded edges and nickel-plated eyelets — durable enough for repeated use at promotions, events and exhibitions of all scales.',img:'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=800&fit=crop&q=80',list:null},
+  'direction-wayfinding':{name:'Direction & Wayfinding Signs',tag:'Guiding people with clarity and brand consistency',desc:'We design and manufacture directional and wayfinding systems for pedestrians, vehicles and complex commercial environments. Clear, on-brand wayfinding improves visitor flow, reinforces your identity and ensures people always know exactly where to go.',img:'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=1200&h=800&fit=crop&q=80',list:null},
+  'promotional-signage':{name:'Promotional Signage',tag:'Portable, rugged and vividly printed',desc:'From indoor and outdoor event banners to hanging displays and exhibition graphics, our promotional signage is printed in-house using the latest digital technology. We also produce vinyl lettering and stickers for vehicles, windows and any solid surface — in countless colours and styles.',img:'https://images.unsplash.com/photo-1461117824904-7bdf2e16b6b2?w=1200&h=800&fit=crop&q=80',list:null},
+  'posters-printing':{name:'Posters Printing',tag:'Any size, any purpose — permanent or temporary',desc:'Perfect for permanent or temporary promotions, our posters are available in any size to suit your needs. We manufacture a wide variety of posters, stickers and labels using the latest print technology for sharp, vibrant results every time.',img:'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&h=800&fit=crop&q=80',list:null},
+  'print-products':{name:'Print Products',tag:'From signage to stationery — consistent brand identity',desc:'Beyond signage, we offer a full suite of print products to establish a consistent look across all your communications. From business cards to corporate stationery, we help your brand speak with one clear visual voice.',img:'https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?w=1200&h=800&fit=crop&q=80',list:['Business Cards','Leaflets','Catalogues','Flyers','Corporate Stationery','Postcards','Posters']},
+  'installation-maintenance':{name:'Installation & Maintenance',tag:'Safe, professional installation and ongoing care',desc:'Our experienced team installs signs safely at height, coordinating site access and liaising with your contact throughout. We also remove and dispose of old signage at no extra cost. Scheduled maintenance contracts keep your signage looking brand-new year-round.',img:'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&h=800&fit=crop&q=80',list:null},
+  'branding-design':{name:'Branding & Design',tag:'Identity that distinguishes and endures',desc:'Strong branding builds credibility, sets you apart from competitors and helps win customers for the long term. Our design team develops visual identities that reflect your business values — ensuring a consistent, professional appearance across signage, print and all communications.',img:'https://images.unsplash.com/photo-1558655146-d09347e92766?w=1200&h=800&fit=crop&q=80',list:null},
+  'engraving-etching':{name:'Engraving & Etching',tag:'Precision engraving in all materials',desc:'We manufacture nameplates, memorial plaques, office and hotel badges, control panels, valve tags and fascias by engraving in brass, plastic, aluminium, stainless steel, Perspex and more. Serving legal, medical, hotel, catering and industrial sectors across the UAE with the latest CAD/CAM technology.',img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&h=800&fit=crop&q=80',list:null},
+  'health-safety':{name:'Health & Safety Signs',tag:'Keeping your workplace compliant and safe',desc:'From no-smoking and fire exit signs to hazard and informational displays, we supply bespoke and standard H&S signage in durable materials suited to your environment. We also offer a free "signage health check" to evaluate your premises and suggest improvements.',img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&h=800&fit=crop&q=80',list:null},
+  'sneeze-guard':{name:'Custom Made Sneeze Guard',tag:'Transparent protection for employees and customers',desc:'Our acrylic sneeze guards provide clear, professional protection for staff and visitors. Self-supporting shields use specially designed metal foot brackets for easy tabletop installation — no tools required. Hanging shields are also available where counter space is limited.',img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop&q=80',list:null}
+};
+
+// POPULATE PAGE
+const params=new URLSearchParams(location.search);
+const slug=params.get('s')||'';
+const svc=SERVICES[slug];
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+if(svc){
+  document.getElementById('pg-title').textContent=svc.name+' — Springs Advertising LLC';
+  const _imgOvr=(function(){try{return JSON.parse(localStorage.getItem('springs_images')||'{}')}catch{return{}}})();
+  const _svcImg=_imgOvr['svcd_'+slug]||svc.img;
+  document.getElementById('hdr-img').src=_svcImg;
+  document.getElementById('bc-name').textContent=svc.name;
+  document.getElementById('hdr-name').textContent=svc.name;
+  document.getElementById('hdr-tag').textContent=svc.tag;
+  document.getElementById('svc-name').textContent=svc.name;
+  document.getElementById('svc-tagline').textContent=svc.tag;
+  document.getElementById('svc-desc').textContent=svc.desc;
+  document.getElementById('svc-img').src=_svcImg;
+  document.getElementById('svc-img').alt=svc.name;
+  if(svc.list&&svc.list.length){
+    const ul=document.getElementById('svc-list');
+    ul.style.display='flex';
+    ul.innerHTML=svc.list.map(i=>`<li>${esc(i)}</li>`).join('');
+  }
+  // Other services (pick 3 random excluding current)
+  const others=Object.entries(SERVICES).filter(([k])=>k!==slug).sort(()=>Math.random()-.5).slice(0,3);
+  document.getElementById('os-grid').innerHTML=others.map(([k,s])=>`
+    <a href="service-detail.html?s=${k}" class="os-card">
+      <div class="os-card-img"><img src="${esc(s.img)}" alt="${esc(s.name)}" loading="lazy"></div>
+      <div class="os-card-body">
+        <div class="os-card-name">${esc(s.name)}</div>
+        <div class="os-card-link">View Service →</div>
+      </div>
+    </a>`).join('');
+  // Re-observe new elements
+  document.querySelectorAll('.os-card').forEach(el=>io.observe(el));
+}else{
+  document.getElementById('svc-detail').innerHTML=`<div class="not-found"><h2>Service Not Found</h2><p>Please select a service from our services page.</p><a href="services.html" class="btn btn-p">View All Services</a></div>`;
+  document.getElementById('other-svcs').style.display='none';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Springs Advertising LLC</title>
+<meta name="description" content="Springs Advertising LLC — UAE's premier signage company since 1977. Our story, team, values and commitment to quality craftsmanship.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,600;0,700;1,400&family=Urbanist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;--bg2:#f7f5f1;--bg3:#edeae4;
+  --text:#111111;--text2:#3d3d3d;--muted:#888888;
+  --border:rgba(0,0,0,0.09);
+  --red:#c01e2a;--navy:#1c3461;--teal:#019a98;
+  --shadow:0 4px 30px rgba(0,0,0,0.07);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Urbanist',sans-serif;font-weight:400;line-height:1.75;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* LOADER */
+#loader{position:fixed;inset:0;background:#fff;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transition:opacity .5s ease,visibility .5s ease}
+#loader.done{opacity:0;visibility:hidden;pointer-events:none}
+.ld-logo{display:flex;align-items:center;gap:14px}
+.ld-icon{width:52px;height:52px;background:var(--navy);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ld-text-wrap .ld-arabic{font-size:10px;color:var(--navy);font-family:serif;display:block;margin-bottom:2px}
+.ld-text-wrap .ld-spring{font-family:'Urbanist',sans-serif;font-weight:700;font-size:22px;letter-spacing:.08em;color:var(--red);line-height:1;display:block}
+.ld-text-wrap .ld-adv{font-size:9px;letter-spacing:.35em;color:var(--navy);display:block;margin-top:1px}
+.ld-bar{width:80px;height:2px;background:rgba(0,0,0,0.08);overflow:hidden;border-radius:2px}
+.ld-fill{height:100%;background:var(--red);width:0;animation:ldFill .5s ease forwards}
+@keyframes ldFill{to{width:100%}}
+
+/* PROGRESS */
+#progress{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--red);z-index:9999;pointer-events:none}
+
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(1.5rem,5vw,4rem);height:76px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--border);transition:all .4s ease}
+.nav-logo{display:flex;align-items:center;flex-shrink:0}
+.nav-logo img{height:48px;width:auto;object-fit:contain;display:block}
+.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
+.nav-links a{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);position:relative;transition:color .3s;font-weight:500}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--red);transition:width .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--red)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 2rem;border-radius:8px;font-family:'Urbanist',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:none;position:relative;overflow:hidden;transition:all .3s;text-decoration:none}
+.btn:hover{transform:translateY(-2px)}
+.btn-p{background:var(--red);color:#fff;box-shadow:0 4px 20px rgba(192,30,42,.3)}
+.btn-p:hover{background:#a8181f;box-shadow:0 8px 30px rgba(192,30,42,.4)}
+.btn-n{background:var(--navy);color:#fff}
+.btn-n:hover{background:#162d55}
+.btn-dk{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+.btn-dk:hover{background:var(--navy);color:#fff}
+
+/* HAMBURGER */
+.hbg{display:none;flex-direction:column;gap:5px;width:24px;cursor:pointer;background:none;border:none;padding:0;z-index:1001}
+.hbg span{display:block;width:100%;height:1.5px;background:var(--text);transition:all .4s cubic-bezier(.23,1,.32,1);transform-origin:center}
+.hbg.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hbg.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hbg.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* MOBILE MENU */
+.mob-menu{position:fixed;inset:0;z-index:999;background:var(--navy);clip-path:circle(0% at calc(100% - 44px) 44px);transition:clip-path .7s cubic-bezier(.77,0,.175,1);display:flex;flex-direction:column;justify-content:center;padding:clamp(2rem,8vw,5rem);overflow:hidden}
+.mob-menu.open{clip-path:circle(160% at calc(100% - 44px) 44px)}
+.mob-links{list-style:none;margin-bottom:3rem}
+.mob-links li{overflow:hidden}
+.mob-links a{display:block;font-family:'Cormorant Garant',serif;font-weight:700;font-size:clamp(2.5rem,9vw,5rem);color:rgba(255,255,255,.3);line-height:1.1;padding:.15em 0;transform:translateY(110%);transition:transform .6s cubic-bezier(.23,1,.32,1),color .3s}
+.mob-menu.open .mob-links a{transform:translateY(0)}
+.mob-links li:nth-child(1) a{transition-delay:.1s}.mob-links li:nth-child(2) a{transition-delay:.16s}.mob-links li:nth-child(3) a{transition-delay:.22s}.mob-links li:nth-child(4) a{transition-delay:.28s}.mob-links li:nth-child(5) a{transition-delay:.34s}.mob-links li:nth-child(6) a{transition-delay:.40s}
+.mob-links a:hover{color:#fff}
+.mob-contact{opacity:0;transition:opacity .4s .4s;font-size:.85rem;color:rgba(255,255,255,.5);display:flex;flex-direction:column;gap:.4rem}
+.mob-menu.open .mob-contact{opacity:1}
+
+/* SCROLL REVEAL */
+.rev{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.23,1,.32,1)}
+.rev.in{opacity:1;transform:translateY(0)}
+.rv-l{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s cubic-bezier(.23,1,.32,1)}
+.rv-l.in{opacity:1;transform:translateX(0)}
+.rv-r{opacity:0;transform:translateX(30px);transition:opacity .7s ease,transform .7s cubic-bezier(.23,1,.32,1)}
+.rv-r.in{opacity:1;transform:translateX(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* SECTION LABEL */
+.label{display:inline-flex;align-items:center;gap:.6rem;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:1rem}
+.label::before{content:'';width:24px;height:1.5px;background:var(--red)}
+
+/* PAGE HEADER */
+.pg-header{padding-top:76px;background:var(--navy);position:relative;overflow:hidden;min-height:380px;display:flex;align-items:flex-end}
+.pg-header-img{position:absolute;inset:0;object-fit:cover;opacity:.22}
+.pg-header-content{position:relative;z-index:1;padding:clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,4rem);max-width:1200px;width:100%}
+.pg-header-label{display:inline-flex;align-items:center;gap:.6rem;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1rem}
+.pg-header-label::before{content:'';width:20px;height:1px;background:var(--red)}
+.pg-header-h{font-family:'Cormorant Garant',serif;font-size:clamp(2.5rem,6vw,5.5rem);font-weight:700;color:#fff;line-height:.95;letter-spacing:-.02em}
+.pg-header-h em{color:rgba(255,255,255,.4);font-style:italic}
+
+/* STORY SECTION */
+#story{padding:clamp(5rem,10vw,9rem) clamp(1.5rem,5vw,4rem)}
+.story-g{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;max-width:1200px;margin:0 auto}
+.story-img-stack{position:relative;height:520px}
+.story-img-main{position:absolute;inset:0 0 0 0;height:100%;border-radius:2px;overflow:hidden}
+.story-img-accent{position:absolute;bottom:-2.5rem;right:-2.5rem;width:55%;height:50%;border-radius:2px;overflow:hidden;border:6px solid var(--bg)}
+.story-year{position:absolute;top:-1.5rem;left:-1.5rem;width:110px;height:110px;background:var(--red);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2}
+.story-year strong{font-family:'Cormorant Garant',serif;font-size:2.2rem;font-weight:700;color:#fff;line-height:1}
+.story-year span{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:.2rem}
+.story-text h2{font-family:'Cormorant Garant',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:700;line-height:1.05;letter-spacing:-.02em;color:var(--navy);margin-bottom:1.5rem}
+.story-text h2 em{color:var(--red);font-style:italic}
+.story-text p{color:var(--text2);font-size:.95rem;line-height:1.9;margin-bottom:1.5rem;max-width:480px}
+
+/* VALUES */
+#values{background:var(--bg2);padding:clamp(5rem,10vw,9rem) clamp(1.5rem,5vw,4rem)}
+.val-head{max-width:1200px;margin:0 auto 3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end}
+.val-title{font-family:'Cormorant Garant',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:var(--navy);letter-spacing:-.02em;line-height:1.05}
+.val-title em{color:var(--red);font-style:italic}
+.val-intro{color:var(--text2);font-size:.92rem;line-height:1.9}
+.val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);max-width:1200px;margin:0 auto}
+.val-item{background:var(--bg);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:background .3s}
+.val-item:hover{background:var(--bg2)}
+.val-item::before{content:'';position:absolute;bottom:0;left:0;height:3px;width:0;background:var(--red);transition:width .4s}
+.val-item:hover::before{width:100%}
+.val-num{font-family:'Cormorant Garant',serif;font-size:4rem;font-weight:700;color:rgba(0,0,0,.05);line-height:1;margin-bottom:-.5rem}
+.val-name{font-family:'Cormorant Garant',serif;font-size:1.25rem;font-weight:600;color:var(--navy);margin-bottom:.75rem}
+.val-desc{font-size:.85rem;color:var(--muted);line-height:1.75}
+
+/* NUMBERS */
+#numbers{background:var(--navy);padding:clamp(5rem,8vw,7rem) clamp(1.5rem,5vw,4rem)}
+.num-head{text-align:center;margin-bottom:4rem}
+.num-title{font-family:'Cormorant Garant',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#fff;letter-spacing:-.02em}
+.num-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1100px;margin:0 auto}
+.num-item{text-align:center;padding:2.5rem 1rem;border-right:1px solid rgba(255,255,255,.08)}
+.num-item:last-child{border:none}
+.num-n{font-family:'Cormorant Garant',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;color:#fff;line-height:1;margin-bottom:.4rem}
+.num-n em{color:var(--teal);font-style:normal}
+.num-l{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+
+/* TEAM / LEADERSHIP */
+#team{padding:clamp(5rem,10vw,9rem) clamp(1.5rem,5vw,4rem);background:var(--bg)}
+.team-head{max-width:1200px;margin:0 auto 3.5rem}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1200px;margin:0 auto}
+.team-card{overflow:hidden;background:var(--bg2)}
+.team-img{height:340px;overflow:hidden;position:relative}
+.team-img img{transition:transform .7s cubic-bezier(.23,1,.32,1)}
+.team-card:hover .team-img img{transform:scale(1.05)}
+.team-info{padding:1.5rem}
+.team-name{font-family:'Cormorant Garant',serif;font-size:1.25rem;font-weight:700;color:var(--navy)}
+.team-role{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-top:.3rem}
+
+/* TIMELINE */
+#timeline{background:var(--bg2);padding:clamp(5rem,10vw,9rem) clamp(1.5rem,5vw,4rem);overflow:hidden}
+.tl-head{max-width:900px;margin:0 auto 4rem;text-align:center}
+.tl-title{font-family:'Cormorant Garant',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:var(--navy);letter-spacing:-.02em}
+.tl-body{max-width:900px;margin:0 auto;position:relative}
+.tl-body::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--border);transform:translateX(-50%)}
+.tl-row{display:grid;grid-template-columns:1fr 60px 1fr;gap:0;align-items:start;margin-bottom:3rem}
+.tl-left{text-align:right;padding-right:2.5rem;padding-top:.4rem}
+.tl-right{text-align:left;padding-left:2.5rem;padding-top:.4rem}
+.tl-dot{width:12px;height:12px;background:var(--red);border-radius:50%;margin:0 auto;margin-top:.55rem;position:relative;flex-shrink:0}
+.tl-year{font-family:'Cormorant Garant',serif;font-size:1.5rem;font-weight:700;color:var(--red);line-height:1}
+.tl-text{font-size:.88rem;color:var(--text2);margin-top:.4rem;line-height:1.7}
+
+/* TICKER */
+.ticker{background:var(--red);overflow:hidden;padding:.8rem 0}
+.t-track{display:flex;width:max-content;animation:tick 22s linear infinite}
+.t-item{white-space:nowrap;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.85);padding:0 2.5rem;font-weight:500}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* FOOTER */
+footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(1.5rem,5vw,4rem) 2rem}
+.ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:4rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:2rem}
+.ft-logo{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem}
+.ft-logo .icon{width:40px;height:40px;background:rgba(255,255,255,.1);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ft-logo .name-wrap .spring{display:block;font-family:'Urbanist',sans-serif;font-weight:700;font-size:15px;letter-spacing:.06em;color:#fff;line-height:1.1}
+.ft-logo .name-wrap .adv{display:block;font-size:7px;letter-spacing:.3em;color:rgba(255,255,255,.4);text-transform:uppercase}
+.ft-tagline{font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.7;max-width:220px}
+.ft-col-h{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:1.25rem}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.ft-links a{font-size:.88rem;color:rgba(255,255,255,.5);transition:color .3s}
+.ft-links a:hover{color:#fff}
+.ft-bottom{display:flex;justify-content:space-between;align-items:center}
+.ft-copy{font-size:.72rem;color:rgba(255,255,255,.3)}
+.ft-soc{display:flex;gap:1.25rem}
+.ft-soc a{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);transition:color .3s}
+.ft-soc a:hover{color:#fff}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .story-g{grid-template-columns:1fr;gap:4rem}
+  .story-img-stack{height:380px}
+  .val-head{grid-template-columns:1fr;gap:1.5rem}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .num-grid{grid-template-columns:1fr 1fr}
+  .ft-grid{grid-template-columns:1fr 1fr}
+  .val-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}.hbg{display:flex}
+  .story-img-accent{display:none}
+  .team-grid{grid-template-columns:1fr}
+  .tl-body::before{left:0}
+  .tl-row{grid-template-columns:40px 1fr;gap:0}
+  .tl-left{display:none}
+  .tl-right{padding-left:1.5rem}
+  .tl-dot{margin:0}
+  .num-grid{grid-template-columns:1fr 1fr}
+  .ft-grid{grid-template-columns:1fr}
+  .ft-bottom{flex-direction:column;gap:1rem;text-align:center}
+  .val-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <img src="logo.png" alt="Springs Advertising LLC" style="height:80px;object-fit:contain">
+  <div class="ld-bar"><div class="ld-fill"></div></div>
+</div>
+
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="Springs Advertising LLC">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about-us.html" class="active">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="contact-us.html" class="btn btn-p" style="padding:.55rem 1.4rem;font-size:.7rem">Get a Quote</a></li>
+  </ul>
+  <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mob-menu" id="mob">
+  <ul class="mob-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about-us.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="contact-us.html">Contact</a></li>
+  </ul>
+  <div class="mob-contact"><span>info@springsadvt.com</span><span>+971 556 622 949</span></div>
+</div>
+
+<!-- PAGE HEADER -->
+<header class="pg-header">
+  <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&h=700&fit=crop&q=80" alt="" class="pg-header-img">
+  <div class="pg-header-content">
+    <div class="pg-header-label">Our Story</div>
+    <h1 class="pg-header-h">Building Brands<br><em>Since 1977</em></h1>
+  </div>
+</header>
+
+<!-- STORY -->
+<section id="story">
+  <div class="story-g">
+    <div class="story-img-stack rv-l">
+      <div class="story-img-main">
+        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&h=900&fit=crop&q=80" alt="Springs Advertising workshop">
+      </div>
+      <div class="story-img-accent">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=400&fit=crop&q=80" alt="Signage installation">
+      </div>
+      <div class="story-year">
+        <strong>1977</strong>
+        <span>Founded</span>
+      </div>
+    </div>
+    <div class="story-text rv-r">
+      <div class="label">Who We Are</div>
+      <h2>Crafting <em>Visual Identity</em> for the Region</h2>
+      <p>Springs Advertising LLC was established in Abu Dhabi in 1977, growing from a modest signage workshop into one of the UAE's most trusted advertising and visual communication companies.</p>
+      <p>Over four decades of work, we've delivered thousands of projects — from intricate shopfront signs to large-scale corporate identity rollouts — always with the same commitment to quality and attention to detail.</p>
+      <a href="contact-us.html" class="btn btn-n">Work With Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section id="values">
+  <div class="val-head">
+    <div class="rv-l">
+      <div class="label">What Drives Us</div>
+      <h2 class="val-title">Our <em>Core</em> Values</h2>
+    </div>
+    <p class="val-intro rv-r">Every sign we make is a promise — to our clients, their customers, and the city we've called home for nearly 50 years.</p>
+  </div>
+  <div class="val-grid">
+    <div class="val-item rev">
+      <div class="val-num">01</div>
+      <div class="val-name">Craftsmanship</div>
+      <p class="val-desc">Precision at every step — from design to fabrication to final installation.</p>
+    </div>
+    <div class="val-item rev d1">
+      <div class="val-num">02</div>
+      <div class="val-name">Reliability</div>
+      <p class="val-desc">On time, on spec, every time. Our clients trust us because we deliver consistently.</p>
+    </div>
+    <div class="val-item rev d2">
+      <div class="val-num">03</div>
+      <div class="val-name">Innovation</div>
+      <p class="val-desc">Combining traditional expertise with modern LED, digital, and print technologies.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section id="numbers">
+  <div class="num-head rev">
+    <div class="label" style="color:rgba(255,255,255,.5);justify-content:center">--&nbsp;&nbsp;By the Numbers</div>
+    <h2 class="num-title">Nearly Five Decades of Excellence</h2>
+  </div>
+  <div class="num-grid">
+    <div class="num-item rev">
+      <div class="num-n" data-target="47">0<em>+</em></div>
+      <div class="num-l">Years in Business</div>
+    </div>
+    <div class="num-item rev d1">
+      <div class="num-n" data-target="5000">0<em>+</em></div>
+      <div class="num-l">Projects Completed</div>
+    </div>
+    <div class="num-item rev d2">
+      <div class="num-n" data-target="200">0<em>+</em></div>
+      <div class="num-l">Corporate Clients</div>
+    </div>
+    <div class="num-item rev d3">
+      <div class="num-n" data-target="60">0<em>+</em></div>
+      <div class="num-l">Team Members</div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="tl-head">
+    <div class="label" style="justify-content:center">Our Journey</div>
+    <h2 class="tl-title">Milestones That Shaped Us</h2>
+  </div>
+  <div class="tl-body">
+    <div class="tl-row rev">
+      <div class="tl-left">
+        <div class="tl-year">1977</div>
+        <p class="tl-text">Founded in Abu Dhabi as a small signage workshop serving local businesses.</p>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-right"></div>
+    </div>
+    <div class="tl-row rev d1">
+      <div class="tl-left"></div>
+      <div class="tl-dot"></div>
+      <div class="tl-right">
+        <div class="tl-year">1990s</div>
+        <p class="tl-text">Expanded into LED illuminated signage and large-format digital printing.</p>
+      </div>
+    </div>
+    <div class="tl-row rev d2">
+      <div class="tl-left">
+        <div class="tl-year">2000s</div>
+        <p class="tl-text">Scaled operations to serve UAE-wide corporate clients and government entities.</p>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-right"></div>
+    </div>
+    <div class="tl-row rev d3">
+      <div class="tl-left"></div>
+      <div class="tl-dot"></div>
+      <div class="tl-right">
+        <div class="tl-year">2010s</div>
+        <p class="tl-text">Introduced vehicle wrapping, wayfinding systems and 3D dimensional lettering.</p>
+      </div>
+    </div>
+    <div class="tl-row rev">
+      <div class="tl-left">
+        <div class="tl-year">Today</div>
+        <p class="tl-text">A full-service visual communications partner with a team of 60+ specialists.</p>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-right"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="t-track">
+    <span class="t-item">Signage Specialists</span><span class="t-item">·</span>
+    <span class="t-item">Est. Abu Dhabi 1977</span><span class="t-item">·</span>
+    <span class="t-item">3D Fabrication</span><span class="t-item">·</span>
+    <span class="t-item">LED Illumination</span><span class="t-item">·</span>
+    <span class="t-item">Vehicle Graphics</span><span class="t-item">·</span>
+    <span class="t-item">Wayfinding Systems</span><span class="t-item">·</span>
+    <span class="t-item">Signage Specialists</span><span class="t-item">·</span>
+    <span class="t-item">Est. Abu Dhabi 1977</span><span class="t-item">·</span>
+    <span class="t-item">3D Fabrication</span><span class="t-item">·</span>
+    <span class="t-item">LED Illumination</span><span class="t-item">·</span>
+    <span class="t-item">Vehicle Graphics</span><span class="t-item">·</span>
+    <span class="t-item">Wayfinding Systems</span><span class="t-item">·</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid">
+    <div>
+      <div class="ft-logo">
+        <div class="icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M2 19 C6 15, 10 11, 12 9 C14 7, 18 4, 22 2" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M2 23 C7 18, 11 14, 13 11 C15 8, 19 4, 22 2" stroke="#019a98" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="name-wrap">
+          <span class="spring">SPRING</span>
+          <span class="adv">Advertising LLC</span>
+        </div>
+      </div>
+      <p class="ft-tagline">Abu Dhabi's trusted signage manufacturer since 1977.</p>
+    </div>
+    <div>
+      <div class="ft-col-h">Navigation</div>
+      <ul class="ft-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about-us.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="admin.html" style="opacity:.4;font-size:.82rem">Admin Panel</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft-col-h">Contact</div>
+      <ul class="ft-links">
+        <li><a href="mailto:info@springsadvt.com">info@springsadvt.com</a></li>
+        <li><a href="tel:+971556622949">+971 556 622 949</a></li>
+        <li><a href="contact-us.html">Abu Dhabi, UAE</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <p class="ft-copy">© 2024 Springs Advertising LLC. All rights reserved. <a href="admin.html" style="color:rgba(255,255,255,.2);margin-left:1rem;font-size:.65rem">Admin ↗</a></p>
+    <div class="ft-soc">
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Facebook</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// LOADER
+const loader=document.getElementById('loader');
+if(sessionStorage.getItem('ld')){loader.style.display='none'}
+else{setTimeout(()=>{loader.classList.add('done');sessionStorage.setItem('ld','1')},500)}
+
+// PROGRESS
+window.addEventListener('scroll',()=>{
+  const p=document.getElementById('progress');
+  const sp=window.scrollY;
+  const dh=document.documentElement.scrollHeight-window.innerHeight;
+  p.style.width=(sp/dh*100)+'%';
+});
+
+// MOBILE MENU
+const hbg=document.getElementById('hbg'),mob=document.getElementById('mob');
+hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mob.classList.toggle('open')});
+
+// SCROLL REVEAL
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.rev,.rv-l,.rv-r').forEach(el=>io.observe(el));
+
+// COUNTER
+function animCount(el){
+  const t=parseInt(el.dataset.target);
+  let s=0,d=Math.ceil(1200/t);
+  const iv=setInterval(()=>{s=Math.min(s+Math.ceil(t/60),t);el.innerHTML=s.toLocaleString()+(el.innerHTML.includes('+')? '<em>+</em>':'');if(s>=t)clearInterval(iv)},d);
+}
+const co=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){animCount(e.target);co.unobserve(e.target)}})},{threshold:.4});
+document.querySelectorAll('[data-target]').forEach(el=>co.observe(el));
+
+// IMAGE OVERRIDES
+(function(){var s;try{s=JSON.parse(localStorage.getItem('springs_images')||'{}')}catch{s={}}
+function q(sel,k){if(!s[k])return;var e=document.querySelector(sel);if(e)e.src=s[k]}
+function qn(sel,n,k){if(!s[k])return;var es=document.querySelectorAll(sel);if(es[n])es[n].src=s[k]}
+q('.pg-header-img','about_header');
+qn('#story img',0,'about_story1');qn('#story img',1,'about_story2');})();
+</script>
+</body>
+</html>

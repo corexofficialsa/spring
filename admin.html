@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Springs Advertising LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:wght@600;700&family=Urbanist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f4f1;--white:#ffffff;--text:#111;--text2:#444;--muted:#888;--border:#e5e3de;--red:#c01e2a;--navy:#1c3461;--teal:#019a98;--shadow:0 2px 16px rgba(0,0,0,0.07)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Urbanist',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font-family:'Urbanist',sans-serif}
+
+/* ===== LOGIN SCREEN ===== */
+#login-screen{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:1000;transition:opacity .4s,visibility .4s}
+#login-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.login-card{background:#fff;border-radius:8px;padding:3rem;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:2.5rem}
+.login-logo .icon{width:44px;height:44px;background:var(--navy);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.login-logo .name .spring{display:block;font-family:'Urbanist',sans-serif;font-weight:700;font-size:16px;letter-spacing:.06em;color:var(--red);line-height:1.1}
+.login-logo .name .adv{display:block;font-size:8px;letter-spacing:.28em;color:var(--navy);text-transform:uppercase;margin-top:2px}
+.login-title{font-family:'Cormorant Garant',serif;font-size:1.7rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
+.login-sub{font-size:.85rem;color:var(--muted);margin-bottom:2rem}
+.f-group{margin-bottom:1.25rem}
+.f-group label{display:block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;font-weight:500}
+.f-group input{width:100%;border:1.5px solid var(--border);border-radius:4px;padding:.8rem 1rem;font-size:.92rem;color:var(--text);outline:none;transition:border-color .3s;background:#fff}
+.f-group input:focus{border-color:var(--navy)}
+.login-err{background:#fff5f5;border:1px solid rgba(192,30,42,.2);border-radius:4px;padding:.75rem 1rem;font-size:.82rem;color:var(--red);margin-bottom:1.25rem;display:none}
+.login-err.show{display:block}
+.login-btn{width:100%;padding:.9rem;background:var(--navy);color:#fff;border:none;border-radius:4px;font-size:.85rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .3s}
+.login-btn:hover{background:#162d55}
+
+/* ===== DASHBOARD ===== */
+#dashboard{display:none;min-height:100vh}
+#dashboard.show{display:flex}
+
+/* SIDEBAR */
+.sidebar{width:240px;background:var(--navy);flex-shrink:0;display:flex;flex-direction:column;min-height:100vh;position:sticky;top:0}
+.sb-logo{padding:1.5rem 1.25rem;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px}
+.sb-logo .icon{width:36px;height:36px;background:rgba(255,255,255,.1);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sb-logo .name .spring{display:block;font-family:'Urbanist',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;color:#fff}
+.sb-logo .name .adv{display:block;font-size:7px;letter-spacing:.25em;color:rgba(255,255,255,.4);text-transform:uppercase;margin-top:1px}
+.sb-nav{flex:1;padding:1.25rem 0}
+.sb-section{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);padding:.5rem 1.25rem;margin-top:.5rem}
+.sb-link{display:flex;align-items:center;gap:.85rem;padding:.75rem 1.25rem;font-size:.85rem;color:rgba(255,255,255,.55);transition:all .3s;cursor:pointer;border:none;background:none;width:100%;text-align:left;border-left:3px solid transparent}
+.sb-link:hover{color:#fff;background:rgba(255,255,255,.06)}
+.sb-link.active{color:#fff;background:rgba(255,255,255,.1);border-left-color:var(--teal)}
+.sb-link .ico{width:18px;height:18px;opacity:.6;flex-shrink:0}
+.sb-link.active .ico{opacity:1}
+.sb-footer{padding:1.25rem;border-top:1px solid rgba(255,255,255,.08)}
+.logout-btn{display:flex;align-items:center;gap:.75rem;font-size:.8rem;color:rgba(255,255,255,.4);cursor:pointer;background:none;border:none;transition:color .3s;padding:.5rem 0}
+.logout-btn:hover{color:#fff}
+
+/* MAIN CONTENT */
+.main{flex:1;overflow:auto}
+.main-header{background:#fff;border-bottom:1px solid var(--border);padding:1.25rem 2rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.main-title{font-family:'Cormorant Garant',serif;font-size:1.5rem;font-weight:700;color:var(--navy)}
+.main-body{padding:2rem}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* CARDS ROW */
+.stat-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-bottom:2rem}
+.stat-card{background:#fff;border-radius:6px;padding:1.5rem;border:1px solid var(--border)}
+.sc-n{font-family:'Cormorant Garant',serif;font-size:2.2rem;font-weight:700;color:var(--navy);line-height:1}
+.sc-l{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
+
+/* TABLE */
+.section-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+.section-bar-title{font-family:'Cormorant Garant',serif;font-size:1.2rem;font-weight:600;color:var(--navy)}
+.add-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.25rem;background:var(--red);color:#fff;border:none;border-radius:4px;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .3s}
+.add-btn:hover{background:#a8181f}
+.table-wrap{background:#fff;border-radius:6px;border:1px solid var(--border);overflow:hidden;margin-bottom:2rem}
+table{width:100%;border-collapse:collapse}
+thead th{background:var(--bg);padding:.85rem 1rem;text-align:left;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border)}
+tbody td{padding:.9rem 1rem;font-size:.88rem;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:#fafaf8}
+.td-img{width:56px;height:40px;object-fit:cover;border-radius:3px;background:var(--bg);display:block}
+.td-img.placeholder{display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--muted);letter-spacing:.05em}
+.badge{display:inline-block;padding:.25rem .7rem;border-radius:50px;font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.badge-open{background:#e8f5e9;color:#2e7d32}
+.badge-closed{background:#fce4ec;color:#c62828}
+.badge-cat{background:#e3f2fd;color:#1565c0}
+.action-btns{display:flex;gap:.5rem}
+.act-btn{padding:.35rem .7rem;border:none;border-radius:3px;font-size:.7rem;font-weight:600;cursor:pointer;transition:all .3s;letter-spacing:.04em}
+.act-del{background:#fce4ec;color:#c01e2a}
+.act-del:hover{background:#c01e2a;color:#fff}
+.act-toggle{background:#e3f2fd;color:#1565c0}
+.act-toggle:hover{background:#1565c0;color:#fff}
+.act-view{background:#e8f5e9;color:#2e7d32}
+.empty-state{text-align:center;padding:4rem 2rem;color:var(--muted)}
+.empty-state p{font-size:.9rem;margin-top:.5rem}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s;padding:1rem}
+.modal-bg.show{opacity:1;visibility:visible}
+.modal{background:#fff;border-radius:8px;width:100%;max-width:560px;max-height:90vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.2);transform:translateY(20px);transition:transform .3s}
+.modal-bg.show .modal{transform:translateY(0)}
+.modal-head{padding:1.5rem 1.75rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.modal-head h3{font-family:'Cormorant Garant',serif;font-size:1.3rem;font-weight:700;color:var(--navy)}
+.modal-close{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--muted);width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .3s}
+.modal-close:hover{background:var(--bg);color:var(--text)}
+.modal-body{padding:1.75rem}
+.modal-f{margin-bottom:1.25rem}
+.modal-f label{display:block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;font-weight:500}
+.modal-f input,.modal-f select,.modal-f textarea{width:100%;border:1.5px solid var(--border);border-radius:4px;padding:.75rem 1rem;font-size:.88rem;color:var(--text);outline:none;transition:border-color .3s;background:#fff}
+.modal-f input:focus,.modal-f select:focus,.modal-f textarea:focus{border-color:var(--navy)}
+.modal-f textarea{resize:vertical;min-height:90px}
+.modal-f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.modal-foot{padding:1.25rem 1.75rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:.75rem}
+.modal-cancel{padding:.65rem 1.25rem;background:var(--bg);border:1px solid var(--border);border-radius:4px;font-size:.8rem;cursor:pointer;transition:all .3s}
+.modal-cancel:hover{background:var(--border)}
+.modal-save{padding:.65rem 1.5rem;background:var(--navy);color:#fff;border:none;border-radius:4px;font-size:.8rem;font-weight:600;cursor:pointer;transition:background .3s}
+.modal-save:hover{background:#162d55}
+.img-preview{width:100%;height:140px;border:1.5px dashed var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;margin-top:.75rem;overflow:hidden;background:var(--bg);cursor:pointer;transition:border-color .3s}
+.img-preview:hover{border-color:var(--navy)}
+.img-preview img{width:100%;height:100%;object-fit:cover;display:none}
+.img-preview .upload-label{font-size:.78rem;color:var(--muted);text-align:center;pointer-events:none}
+.img-preview .upload-label span{display:block;font-size:1.5rem;margin-bottom:.4rem}
+#img-input{display:none}
+
+/* NOTICE */
+.notice{position:fixed;top:1.5rem;right:1.5rem;background:var(--navy);color:#fff;padding:.85rem 1.5rem;border-radius:4px;font-size:.82rem;font-weight:500;z-index:3000;transform:translateX(120%);transition:transform .4s cubic-bezier(.23,1,.32,1);box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.notice.show{transform:translateX(0)}
+.notice.success{background:#2e7d32}
+.notice.error{background:var(--red)}
+
+/* IMAGE MANAGER */
+.img-group{background:#fff;border-radius:6px;border:1px solid var(--border);margin-bottom:.85rem;overflow:hidden}
+.img-group-head{padding:.85rem 1.25rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;transition:background .2s}
+.img-group-head:hover{background:#fafaf8}
+.img-group-title{font-family:'Cormorant Garant',serif;font-size:1.05rem;font-weight:600;color:var(--navy)}
+.img-group-body{border-top:1px solid var(--border);padding:1rem;display:none;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.75rem}
+.img-group-body.open{display:grid}
+.img-row{border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.img-row-thumb{width:100%;height:100px;object-fit:cover;display:block;background:var(--bg)}
+.img-row-info{padding:.5rem .65rem;display:flex;flex-direction:column;gap:.35rem}
+.img-row-label{font-size:.65rem;font-weight:600;letter-spacing:.05em;color:var(--text);text-transform:uppercase}
+.img-row-input{width:100%;border:1.5px solid var(--border);border-radius:3px;padding:.4rem .6rem;font-size:.76rem;color:var(--text);outline:none;transition:border-color .3s;background:#fff}
+.img-row-input:focus{border-color:var(--navy)}
+.img-row-clear{padding:.22rem .55rem;background:#fce4ec;color:#c01e2a;border:none;border-radius:3px;font-size:.62rem;font-weight:600;cursor:pointer;align-self:flex-start;transition:all .2s}
+.img-row-clear:hover{background:#c01e2a;color:#fff}
+.imgs-save-bar{background:rgba(245,244,241,.96);backdrop-filter:blur(6px);border-top:1px solid var(--border);padding:.9rem 2rem;display:flex;justify-content:space-between;align-items:center;position:sticky;bottom:0;margin:1.5rem -2rem -2rem;z-index:5}
+.imgs-save-btn{padding:.6rem 1.5rem;background:var(--navy);color:#fff;border:none;border-radius:4px;font-size:.8rem;font-weight:600;cursor:pointer;transition:background .3s}
+.imgs-save-btn:hover{background:#162d55}
+@media(max-width:768px){.sidebar{width:200px}.main-body{padding:1rem}.modal-f-row{grid-template-columns:1fr}}
+@media(max-width:600px){.sidebar{display:none}}
+</style>
+</head>
+<body>
+
+<!-- NOTICE -->
+<div id="notice" class="notice"></div>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <img src="logo.png" alt="Springs Advertising LLC" style="height:56px;width:auto;object-fit:contain">
+    </div>
+    <h2 class="login-title">Admin Login</h2>
+    <p class="login-sub">Sign in to manage your website content.</p>
+    <div class="login-err" id="login-err">Incorrect username or password. Please try again.</div>
+    <div class="f-group"><label>Username</label><input type="text" id="u-input" placeholder="Enter username" autocomplete="username"></div>
+    <div class="f-group"><label>Password</label><input type="password" id="p-input" placeholder="Enter password" autocomplete="current-password"></div>
+    <button class="login-btn" onclick="doLogin()">Sign In</button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-logo">
+      <img src="logo.png" alt="Springs Advertising LLC" style="height:36px;width:auto;object-fit:contain">
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section">Content</div>
+      <button class="sb-link active" onclick="showTab('projects',this)">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Projects
+      </button>
+      <button class="sb-link" onclick="showTab('careers',this)">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        Careers
+      </button>
+      <button class="sb-link" onclick="showTab('images',this)">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Images
+      </button>
+      <div class="sb-section">Website</div>
+      <a href="index.html" target="_blank" class="sb-link">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        View Website
+      </a>
+    </nav>
+    <div class="sb-footer">
+      <button class="logout-btn" onclick="doLogout()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="main-header">
+      <h1 class="main-title" id="main-title">Projects</h1>
+      <span id="admin-user" style="font-size:.8rem;color:var(--muted)"></span>
+    </div>
+    <div class="main-body">
+
+      <!-- PROJECTS TAB -->
+      <div class="tab-panel active" id="tab-projects">
+        <div class="stat-cards" id="proj-stats"></div>
+        <div class="section-bar">
+          <div class="section-bar-title">All Projects</div>
+          <button class="add-btn" onclick="openModal('project')">+ Add Project</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th style="width:70px">Image</th>
+              <th>Title</th>
+              <th>Client</th>
+              <th>Category</th>
+              <th style="width:120px">Actions</th>
+            </tr></thead>
+            <tbody id="proj-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- CAREERS TAB -->
+      <div class="tab-panel" id="tab-careers">
+        <div class="stat-cards" id="career-stats"></div>
+        <div class="section-bar">
+          <div class="section-bar-title">All Positions</div>
+          <button class="add-btn" onclick="openModal('career')">+ Add Position</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th>Position</th>
+              <th>Type</th>
+              <th>Location</th>
+              <th>Status</th>
+              <th style="width:160px">Actions</th>
+            </tr></thead>
+            <tbody id="career-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- IMAGES TAB -->
+      <div class="tab-panel" id="tab-images">
+        <div class="section-bar">
+          <div class="section-bar-title">Website Images</div>
+          <button class="add-btn" onclick="saveAllImages()">Save All Changes</button>
+        </div>
+        <p style="font-size:.82rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.65">Paste any public image URL to replace images across the site. Changes take effect immediately after saving.</p>
+        <div id="img-groups"></div>
+        <div class="imgs-save-bar">
+          <span style="font-size:.77rem;color:var(--muted)">Tip: Right-click any image online → "Copy image address"</span>
+          <button class="imgs-save-btn" onclick="saveAllImages()">Save All Changes</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT MODAL -->
+<div class="modal-bg" id="proj-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Add Project</h3>
+      <button class="modal-close" onclick="closeModal('proj-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-f-row">
+        <div class="modal-f"><label>Project Title *</label><input type="text" id="pf-title" placeholder="e.g. Burjeel Medical City"></div>
+        <div class="modal-f"><label>Client Name *</label><input type="text" id="pf-client" placeholder="e.g. Burjeel Holdings"></div>
+      </div>
+      <div class="modal-f-row">
+        <div class="modal-f">
+          <label>Category *</label>
+          <select id="pf-cat">
+            <option value="">Select category...</option>
+            <option value="outdoor">Outdoor & Business Signs</option>
+            <option value="internal">Internal Signs</option>
+            <option value="vehicle">Vehicle Graphics</option>
+            <option value="wayfinding">Wayfinding</option>
+            <option value="window">Window Graphics</option>
+            <option value="safety">Health & Safety</option>
+            <option value="engraving">Engraving & Etching</option>
+            <option value="led">LED Illuminated</option>
+          </select>
+        </div>
+        <div class="modal-f">
+          <label>Location</label>
+          <input type="text" id="pf-loc" placeholder="e.g. Abu Dhabi, UAE">
+        </div>
+      </div>
+      <div class="modal-f"><label>Description</label><textarea id="pf-desc" placeholder="Brief description of the project..."></textarea></div>
+      <div class="modal-f">
+        <label>Project Image</label>
+        <input type="file" id="img-input" accept="image/*" onchange="previewImg(this)">
+        <div class="img-preview" onclick="document.getElementById('img-input').click()">
+          <img id="img-preview-el" alt="">
+          <div class="upload-label" id="upload-label"><span>🖼</span>Click to upload image<br><span style="font-size:.65rem;opacity:.6">(JPG, PNG, WebP)</span></div>
+        </div>
+      </div>
+      <div class="modal-f">
+        <label>Or Image URL</label>
+        <input type="url" id="pf-imgurl" placeholder="https://..." oninput="setImgFromUrl(this.value)">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="modal-cancel" onclick="closeModal('proj-modal')">Cancel</button>
+      <button class="modal-save" onclick="saveProject()">Save Project</button>
+    </div>
+  </div>
+</div>
+
+<!-- CAREER MODAL -->
+<div class="modal-bg" id="career-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Add Position</h3>
+      <button class="modal-close" onclick="closeModal('career-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-f"><label>Job Title *</label><input type="text" id="cf-title" placeholder="e.g. Sign Fabricator"></div>
+      <div class="modal-f-row">
+        <div class="modal-f">
+          <label>Employment Type</label>
+          <select id="cf-type">
+            <option value="Full-Time">Full-Time</option>
+            <option value="Part-Time">Part-Time</option>
+            <option value="Contract">Contract</option>
+            <option value="Internship">Internship</option>
+          </select>
+        </div>
+        <div class="modal-f">
+          <label>Location</label>
+          <select id="cf-loc">
+            <option value="Abu Dhabi">Abu Dhabi</option>
+            <option value="Dubai">Dubai</option>
+            <option value="UAE (Both)">UAE (Both)</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-f">
+        <label>Status</label>
+        <select id="cf-status">
+          <option value="open">Open</option>
+          <option value="closed">Closed</option>
+        </select>
+      </div>
+      <div class="modal-f"><label>Job Description *</label><textarea id="cf-desc" placeholder="Describe the role and responsibilities..."></textarea></div>
+      <div class="modal-f"><label>Requirements (one per line)</label><textarea id="cf-reqs" placeholder="3+ years experience in sign fabrication&#10;UAE driving licence&#10;Ability to read technical drawings"></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <button class="modal-cancel" onclick="closeModal('career-modal')">Cancel</button>
+      <button class="modal-save" onclick="saveCareer()">Save Position</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const CREDS={u:'SPRING_ADV',p:'SPRING3223!'};
+const PROJ_KEY='springs_projects';
+const CAREER_KEY='springs_careers';
+
+// ===== AUTH =====
+function doLogin(){
+  const u=document.getElementById('u-input').value.trim();
+  const p=document.getElementById('p-input').value;
+  if(u===CREDS.u && p===CREDS.p){
+    sessionStorage.setItem('springs_auth','1');
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('dashboard').classList.add('show');
+    document.getElementById('admin-user').textContent='Logged in as '+u;
+    renderAll();
+  }else{
+    document.getElementById('login-err').classList.add('show');
+    document.getElementById('p-input').value='';
+  }
+}
+document.getElementById('p-input').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
+document.getElementById('u-input').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('p-input').focus()});
+function doLogout(){sessionStorage.removeItem('springs_auth');location.reload()}
+if(sessionStorage.getItem('springs_auth')==='1'){
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('dashboard').classList.add('show');
+  document.getElementById('admin-user').textContent='Logged in as SPRING_ADV';
+  renderAll();
+}
+
+// ===== DEFAULT DATA =====
+const DEFAULT_PROJECTS=[
+  {id:1,title:'Burjeel Medical City',client:'Burjeel Holdings',cat:'outdoor',loc:'Abu Dhabi',desc:'External 3D illuminated building sign with LED back-illumination.',img:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&h=300&fit=crop'},
+  {id:2,title:'Abu Dhabi Investment Council',client:'ADIC',cat:'outdoor',loc:'Abu Dhabi',desc:'3D projected logo sign for main entrance.',img:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&h=300&fit=crop'},
+  {id:3,title:'FDC Abu Dhabi',client:'FDC',cat:'internal',loc:'Abu Dhabi',desc:'Reception 3D illuminated sign with acrylic face.',img:'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=400&h=300&fit=crop'},
+  {id:4,title:'LLH Abu Dhabi',client:'LLH Hospital',cat:'internal',loc:'Abu Dhabi',desc:'Blade signs and directory signage system.',img:'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop'},
+  {id:5,title:'Solar Car PI',client:'Solar Car PI',cat:'vehicle',loc:'Abu Dhabi',desc:'Complete vehicle wrapping and brand graphics.',img:'https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=400&h=300&fit=crop'},
+  {id:6,title:'Asqalan Reception',client:'Asqalan',cat:'internal',loc:'Abu Dhabi',desc:'3D illuminated reception sign with LED modules.',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop'},
+];
+const DEFAULT_CAREERS=[
+  {id:1,title:'Sign Fabricator / Sign Maker',type:'Full-Time',loc:'Abu Dhabi',status:'open',desc:'Join our production team to fabricate 3D letters, channel letters, and various signage types.',reqs:['3+ years experience in sign fabrication','Proficiency with metal cutting and welding','UAE driving licence preferred']},
+  {id:2,title:'Graphic Designer — Signage',type:'Full-Time',loc:'Abu Dhabi',status:'open',desc:'Creative designer with sign production knowledge to develop concepts and production-ready artwork.',reqs:['Adobe Illustrator, Photoshop, CorelDRAW','Experience designing for signage or print','Strong typographic skills']},
+  {id:3,title:'Installation Technician',type:'Full-Time',loc:'Abu Dhabi',status:'open',desc:'Install a wide range of signage types from indoor office signs to large external building fascia signs.',reqs:['2+ years installation experience','Comfortable working at heights','UAE driving licence required']},
+];
+
+function getProjects(){
+  try{const d=localStorage.getItem(PROJ_KEY);return d?JSON.parse(d):DEFAULT_PROJECTS}catch{return DEFAULT_PROJECTS}
+}
+function saveProjects(data){localStorage.setItem(PROJ_KEY,JSON.stringify(data))}
+function getCareers(){
+  try{const d=localStorage.getItem(CAREER_KEY);return d?JSON.parse(d):DEFAULT_CAREERS}catch{return DEFAULT_CAREERS}
+}
+function saveCareers(data){localStorage.setItem(CAREER_KEY,JSON.stringify(data))}
+
+// ===== TABS =====
+function showTab(name,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sb-link').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  if(btn)btn.classList.add('active');
+  document.getElementById('main-title').textContent=name.charAt(0).toUpperCase()+name.slice(1);
+  if(name==='projects')renderProjects();
+  if(name==='careers')renderCareers();
+  if(name==='images')renderImages();
+}
+
+// ===== RENDER PROJECTS =====
+function renderProjects(){
+  const data=getProjects();
+  const tbody=document.getElementById('proj-tbody');
+  const cats={outdoor:'Outdoor',internal:'Internal',vehicle:'Vehicle',wayfinding:'Wayfinding',window:'Window',safety:'Safety',engraving:'Engraving',led:'LED'};
+
+  document.getElementById('proj-stats').innerHTML=`
+    <div class="stat-card"><div class="sc-n">${data.length}</div><div class="sc-l">Total Projects</div></div>
+    <div class="stat-card"><div class="sc-n">${data.filter(p=>p.cat==='outdoor').length}</div><div class="sc-l">Outdoor Signs</div></div>
+    <div class="stat-card"><div class="sc-n">${data.filter(p=>p.cat==='internal').length}</div><div class="sc-l">Internal Signs</div></div>
+    <div class="stat-card"><div class="sc-n">${data.filter(p=>p.cat==='vehicle').length}</div><div class="sc-l">Vehicle Projects</div></div>
+  `;
+
+  if(!data.length){tbody.innerHTML=`<tr><td colspan="5"><div class="empty-state">📂<p>No projects yet. Click "Add Project" to get started.</p></div></td></tr>`;return}
+  tbody.innerHTML=data.map(p=>`
+    <tr>
+      <td>${p.img?`<img src="${p.img}" class="td-img" alt="${p.title}" onerror="this.style.display='none'">`:`<div class="td-img placeholder">No img</div>`}</td>
+      <td><strong>${esc(p.title)}</strong><br><span style="font-size:.75rem;color:var(--muted)">${esc(p.loc||'')}</span></td>
+      <td>${esc(p.client)}</td>
+      <td><span class="badge badge-cat">${cats[p.cat]||p.cat}</span></td>
+      <td><div class="action-btns">
+        <button class="act-btn act-del" onclick="delProject(${p.id})">Delete</button>
+      </div></td>
+    </tr>
+  `).join('');
+}
+
+// ===== RENDER CAREERS =====
+function renderCareers(){
+  const data=getCareers();
+  const tbody=document.getElementById('career-tbody');
+
+  document.getElementById('career-stats').innerHTML=`
+    <div class="stat-card"><div class="sc-n">${data.length}</div><div class="sc-l">Total Positions</div></div>
+    <div class="stat-card"><div class="sc-n">${data.filter(c=>c.status==='open').length}</div><div class="sc-l">Open Positions</div></div>
+    <div class="stat-card"><div class="sc-n">${data.filter(c=>c.status==='closed').length}</div><div class="sc-l">Closed Positions</div></div>
+  `;
+
+  if(!data.length){tbody.innerHTML=`<tr><td colspan="5"><div class="empty-state">💼<p>No positions yet. Click "Add Position" to get started.</p></div></td></tr>`;return}
+  tbody.innerHTML=data.map(c=>`
+    <tr>
+      <td><strong>${esc(c.title)}</strong></td>
+      <td>${esc(c.type)}</td>
+      <td>${esc(c.loc)}</td>
+      <td><span class="badge badge-${c.status}">${c.status==='open'?'Open':'Closed'}</span></td>
+      <td><div class="action-btns">
+        <button class="act-btn act-toggle" onclick="toggleCareer(${c.id})">${c.status==='open'?'Close':'Reopen'}</button>
+        <button class="act-btn act-del" onclick="delCareer(${c.id})">Delete</button>
+      </div></td>
+    </tr>
+  `).join('');
+}
+
+function renderAll(){renderProjects();renderCareers()}
+
+// ===== ACTIONS =====
+function delProject(id){
+  if(!confirm('Delete this project?'))return;
+  const data=getProjects().filter(p=>p.id!==id);
+  saveProjects(data);renderProjects();showNotice('Project deleted','success');
+}
+function delCareer(id){
+  if(!confirm('Delete this position?'))return;
+  const data=getCareers().filter(c=>c.id!==id);
+  saveCareers(data);renderCareers();showNotice('Position deleted','success');
+}
+function toggleCareer(id){
+  const data=getCareers().map(c=>{if(c.id===id){c.status=c.status==='open'?'closed':'open'}return c});
+  saveCareers(data);renderCareers();showNotice('Status updated','success');
+}
+
+// ===== MODALS =====
+let imgBase64='';
+function openModal(type){
+  resetModal(type);
+  document.getElementById(type==='project'?'proj-modal':'career-modal').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeModal(id){
+  document.getElementById(id).classList.remove('show');
+  document.body.style.overflow='';
+  imgBase64='';
+}
+function resetModal(type){
+  if(type==='project'){
+    ['pf-title','pf-client','pf-loc','pf-desc','pf-imgurl'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('pf-cat').selectedIndex=0;
+    document.getElementById('img-preview-el').style.display='none';
+    document.getElementById('upload-label').style.display='block';
+    document.getElementById('img-input').value='';
+    imgBase64='';
+  }else{
+    ['cf-title','cf-desc','cf-reqs'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('cf-type').selectedIndex=0;
+    document.getElementById('cf-loc').selectedIndex=0;
+    document.getElementById('cf-status').selectedIndex=0;
+  }
+}
+function previewImg(input){
+  if(!input.files[0])return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    imgBase64=e.target.result;
+    const el=document.getElementById('img-preview-el');
+    el.src=imgBase64;el.style.display='block';
+    document.getElementById('upload-label').style.display='none';
+    document.getElementById('pf-imgurl').value='';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function setImgFromUrl(url){
+  if(!url)return;
+  imgBase64='';
+  const el=document.getElementById('img-preview-el');
+  el.src=url;el.style.display='block';
+  document.getElementById('upload-label').style.display='none';
+  document.getElementById('img-input').value='';
+}
+
+function saveProject(){
+  const title=document.getElementById('pf-title').value.trim();
+  const client=document.getElementById('pf-client').value.trim();
+  const cat=document.getElementById('pf-cat').value;
+  if(!title||!client||!cat){showNotice('Please fill in required fields','error');return}
+  const imgUrl=document.getElementById('pf-imgurl').value.trim();
+  const img=imgBase64||imgUrl||'';
+  const project={
+    id:Date.now(),title,client,cat,
+    loc:document.getElementById('pf-loc').value.trim()||'Abu Dhabi, UAE',
+    desc:document.getElementById('pf-desc').value.trim(),
+    img
+  };
+  const data=getProjects();
+  data.push(project);
+  saveProjects(data);
+  closeModal('proj-modal');
+  renderProjects();
+  showNotice('Project added successfully!','success');
+}
+
+function saveCareer(){
+  const title=document.getElementById('cf-title').value.trim();
+  const desc=document.getElementById('cf-desc').value.trim();
+  if(!title||!desc){showNotice('Please fill in required fields','error');return}
+  const reqsText=document.getElementById('cf-reqs').value.trim();
+  const reqs=reqsText?reqsText.split('\n').map(r=>r.trim()).filter(Boolean):[];
+  const career={
+    id:Date.now(),title,
+    type:document.getElementById('cf-type').value,
+    loc:document.getElementById('cf-loc').value,
+    status:document.getElementById('cf-status').value,
+    desc,reqs
+  };
+  const data=getCareers();
+  data.push(career);
+  saveCareers(data);
+  closeModal('career-modal');
+  renderCareers();
+  showNotice('Position added successfully!','success');
+}
+
+// ===== NOTICES =====
+function showNotice(msg,type='success'){
+  const n=document.getElementById('notice');
+  n.textContent=msg;n.className='notice '+type+' show';
+  setTimeout(()=>n.classList.remove('show'),3000);
+}
+
+// ===== UTIL =====
+function esc(str){return String(str).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+
+// ===== IMAGE MANAGER =====
+const IMG_KEY='springs_images';
+const IMG_DEFS=[
+  // Homepage
+  {g:'Homepage',k:'idx_hero',l:'Hero Image'},
+  {g:'Homepage',k:'idx_about',l:'About Section'},
+  {g:'Homepage',k:'idx_srv_1',l:'Service Card 1 — Vehicle Graphics'},
+  {g:'Homepage',k:'idx_srv_2',l:'Service Card 2 — Outdoor Signs'},
+  {g:'Homepage',k:'idx_srv_3',l:'Service Card 3 — Window Graphics'},
+  {g:'Homepage',k:'idx_srv_4',l:'Service Card 4 — Internal Signs'},
+  {g:'Homepage',k:'idx_srv_5',l:'Service Card 5 — Wayfinding'},
+  {g:'Homepage',k:'idx_srv_6',l:'Service Card 6 — Engraving'},
+  // Services Page
+  {g:'Services Page',k:'srv_header',l:'Page Header'},
+  {g:'Services Page',k:'srv_card_1',l:'Card 01 — Vehicle Graphics'},
+  {g:'Services Page',k:'srv_card_2',l:'Card 02 — Outdoor Signs'},
+  {g:'Services Page',k:'srv_card_3',l:'Card 03 — Internal Signs'},
+  {g:'Services Page',k:'srv_card_4',l:'Card 04 — Lettering'},
+  {g:'Services Page',k:'srv_card_5',l:'Card 05 — Window Graphics'},
+  {g:'Services Page',k:'srv_card_6',l:'Card 06 — Digital Vinyl'},
+  {g:'Services Page',k:'srv_card_7',l:'Card 07 — Banners & Flex'},
+  {g:'Services Page',k:'srv_card_8',l:'Card 08 — Wayfinding'},
+  {g:'Services Page',k:'srv_card_9',l:'Card 09 — Promotional'},
+  {g:'Services Page',k:'srv_card_10',l:'Card 10 — Posters Printing'},
+  {g:'Services Page',k:'srv_card_11',l:'Card 11 — Print Products'},
+  {g:'Services Page',k:'srv_card_12',l:'Card 12 — Installation'},
+  {g:'Services Page',k:'srv_card_13',l:'Card 13 — Branding & Design'},
+  {g:'Services Page',k:'srv_card_14',l:'Card 14 — Engraving'},
+  {g:'Services Page',k:'srv_card_15',l:'Card 15 — Health & Safety'},
+  {g:'Services Page',k:'srv_card_16',l:'Card 16 — Sneeze Guard'},
+  {g:'Services Page',k:'srv_cta',l:'CTA Background'},
+  // About Us
+  {g:'About Us',k:'about_header',l:'Page Header'},
+  {g:'About Us',k:'about_story1',l:'Story — Workshop Image'},
+  {g:'About Us',k:'about_story2',l:'Story — Signage Image'},
+  // Projects Page
+  {g:'Projects Page',k:'proj_header',l:'Page Header'},
+  // Vehicle Graphics
+  {g:'Projects — Vehicle Graphics',k:'proj_veh_1',l:'Fleet Branding'},
+  {g:'Projects — Vehicle Graphics',k:'proj_veh_2',l:'Van Wrap'},
+  {g:'Projects — Vehicle Graphics',k:'proj_veh_3',l:'Decals'},
+  {g:'Projects — Vehicle Graphics',k:'proj_veh_4',l:'Truck Graphics'},
+  {g:'Projects — Vehicle Graphics',k:'proj_veh_5',l:'Corporate Fleet'},
+  // Outdoor Signs
+  {g:'Projects — Outdoor Signs',k:'proj_out_1',l:'3D Letters'},
+  {g:'Projects — Outdoor Signs',k:'proj_out_2',l:'Building Signage'},
+  {g:'Projects — Outdoor Signs',k:'proj_out_3',l:'Office Entrance'},
+  {g:'Projects — Outdoor Signs',k:'proj_out_4',l:'LED Illuminated'},
+  // Vinyl & Print
+  {g:'Projects — Vinyl & Print',k:'proj_vin_1',l:'Large Format Print'},
+  {g:'Projects — Vinyl & Print',k:'proj_vin_2',l:'Digital Print'},
+  {g:'Projects — Vinyl & Print',k:'proj_vin_3',l:'Custom Stickers'},
+  {g:'Projects — Vinyl & Print',k:'proj_vin_4',l:'Labels'},
+  // Window Graphics
+  {g:'Projects — Window Graphics',k:'proj_win_1',l:'Shopfront Vinyl'},
+  {g:'Projects — Window Graphics',k:'proj_win_2',l:'Decorative Vinyl'},
+  {g:'Projects — Window Graphics',k:'proj_win_3',l:'Office Glass'},
+  {g:'Projects — Window Graphics',k:'proj_win_4',l:'Frosted Film'},
+  // Internal Signs
+  {g:'Projects — Internal Signs',k:'proj_int_1',l:'Lobby Signage'},
+  {g:'Projects — Internal Signs',k:'proj_int_2',l:'Reception Feature'},
+  {g:'Projects — Internal Signs',k:'proj_int_3',l:'Room Plaques'},
+  {g:'Projects — Internal Signs',k:'proj_int_4',l:'Office Branding'},
+  // Engraving
+  {g:'Projects — Engraving',k:'proj_eng_1',l:'Workshop'},
+  {g:'Projects — Engraving',k:'proj_eng_2',l:'Nameplates'},
+  {g:'Projects — Engraving',k:'proj_eng_3',l:'Plaques'},
+  {g:'Projects — Engraving',k:'proj_eng_4',l:'Badges'},
+  // Health & Safety
+  {g:'Projects — Health & Safety',k:'proj_saf_1',l:'Safety Signage'},
+  {g:'Projects — Health & Safety',k:'proj_saf_2',l:'Fire Exit'},
+  {g:'Projects — Health & Safety',k:'proj_saf_3',l:'Hazard Signs'},
+  {g:'Projects — Health & Safety',k:'proj_saf_4',l:'Safety System'},
+  // Wayfinding
+  {g:'Projects — Wayfinding',k:'proj_way_1',l:'Campus Wayfinding'},
+  {g:'Projects — Wayfinding',k:'proj_way_2',l:'Directional Totem'},
+  {g:'Projects — Wayfinding',k:'proj_way_3',l:'Car Park Signs'},
+  {g:'Projects — Wayfinding',k:'proj_way_4',l:'Floor Graphics'},
+  // Banners
+  {g:'Projects — Banners',k:'proj_ban_1',l:'Exhibition Display'},
+  {g:'Projects — Banners',k:'proj_ban_2',l:'Outdoor Flex'},
+  {g:'Projects — Banners',k:'proj_ban_3',l:'Pull-Up Banner'},
+  {g:'Projects — Banners',k:'proj_ban_4',l:'Event Signage'},
+  // Service Detail Pages
+  {g:'Service Detail Pages',k:'svcd_vehicle-graphics',l:'Vehicle Graphics'},
+  {g:'Service Detail Pages',k:'svcd_outdoor-business-sign',l:'Outdoor & Business Sign'},
+  {g:'Service Detail Pages',k:'svcd_internal-signs',l:'Internal Signs'},
+  {g:'Service Detail Pages',k:'svcd_lettering',l:'Lettering'},
+  {g:'Service Detail Pages',k:'svcd_window-graphics',l:'Window Graphics'},
+  {g:'Service Detail Pages',k:'svcd_digital-vinyl',l:'Digital Vinyl Stickers'},
+  {g:'Service Detail Pages',k:'svcd_banners-flex',l:'Banners & Flex'},
+  {g:'Service Detail Pages',k:'svcd_direction-wayfinding',l:'Direction & Wayfinding'},
+  {g:'Service Detail Pages',k:'svcd_promotional-signage',l:'Promotional Signage'},
+  {g:'Service Detail Pages',k:'svcd_posters-printing',l:'Posters Printing'},
+  {g:'Service Detail Pages',k:'svcd_print-products',l:'Print Products'},
+  {g:'Service Detail Pages',k:'svcd_installation-maintenance',l:'Installation & Maintenance'},
+  {g:'Service Detail Pages',k:'svcd_branding-design',l:'Branding & Design'},
+  {g:'Service Detail Pages',k:'svcd_engraving-etching',l:'Engraving & Etching'},
+  {g:'Service Detail Pages',k:'svcd_health-safety',l:'Health & Safety Signs'},
+  {g:'Service Detail Pages',k:'svcd_sneeze-guard',l:'Custom Made Sneeze Guard'},
+];
+
+function getImages(){try{const d=localStorage.getItem(IMG_KEY);return d?JSON.parse(d):{}}catch{return{}}}
+function saveImagesStore(data){localStorage.setItem(IMG_KEY,JSON.stringify(data))}
+
+function renderImages(){
+  const store=getImages();
+  const groups={};
+  IMG_DEFS.forEach(d=>{if(!groups[d.g])groups[d.g]=[];groups[d.g].push(d)});
+  document.getElementById('img-groups').innerHTML=Object.entries(groups).map(([gname,defs])=>`
+    <div class="img-group">
+      <div class="img-group-head" onclick="toggleImgGrp(this)">
+        <div class="img-group-title">${esc(gname)}</div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="img-group-body">${defs.map(def=>{
+        const val=store[def.k]||'';
+        return `<div class="img-row" data-key="${def.k}">
+          <img class="img-row-thumb" src="${val?esc(val):''}" alt="" style="opacity:${val?1:0}" onerror="this.style.opacity=0" onload="this.style.opacity=1">
+          <div class="img-row-info">
+            <div class="img-row-label">${esc(def.l)}</div>
+            <input class="img-row-input" type="url" placeholder="Paste image URL..." value="${esc(val)}" oninput="liveImgPreview(this)" data-key="${def.k}">
+            <button class="img-row-clear" onclick="clearImgRow(this)" style="${val?'':'opacity:.4;pointer-events:none'}">Clear</button>
+          </div>
+        </div>`;
+      }).join('')}</div>
+    </div>`).join('');
+}
+
+function toggleImgGrp(head){
+  const body=head.nextElementSibling;
+  body.classList.toggle('open');
+  head.querySelector('svg').style.transform=body.classList.contains('open')?'rotate(180deg)':'';
+}
+
+function liveImgPreview(input){
+  const url=input.value.trim();
+  const row=input.closest('.img-row');
+  const thumb=row.querySelector('.img-row-thumb');
+  const clr=row.querySelector('.img-row-clear');
+  if(url){thumb.src=url;thumb.style.opacity=1;clr.style.opacity='';clr.style.pointerEvents=''}
+  else{thumb.src='';thumb.style.opacity=0;clr.style.opacity='.4';clr.style.pointerEvents='none'}
+}
+
+function clearImgRow(btn){
+  const row=btn.closest('.img-row');
+  const input=row.querySelector('.img-row-input');
+  input.value='';
+  liveImgPreview(input);
+}
+
+function saveAllImages(){
+  const store={};
+  document.querySelectorAll('.img-row').forEach(row=>{
+    const url=row.querySelector('.img-row-input').value.trim();
+    if(url)store[row.dataset.key]=url;
+  });
+  saveImagesStore(store);
+  showNotice('Images saved successfully!','success');
+}
+
+// Close modals on backdrop click
+document.querySelectorAll('.modal-bg').forEach(bg=>bg.addEventListener('click',e=>{if(e.target===bg)closeModal(bg.id)}));
+</script>
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Springs Advertising LLC</title>
+<meta name="description" content="Full-service signage solutions — 3D signs, LED illumination, vehicle graphics, wayfinding, digital printing and more. Springs Advertising LLC, Abu Dhabi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,600;0,700;1,400&family=Urbanist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;--bg2:#f7f5f1;--bg3:#edeae4;
+  --text:#111111;--text2:#3d3d3d;--muted:#888888;
+  --border:rgba(0,0,0,0.09);
+  --red:#c01e2a;--navy:#1c3461;--teal:#019a98;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Urbanist',sans-serif;font-weight:400;line-height:1.75;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* LOADER */
+#loader{position:fixed;inset:0;background:#fff;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transition:opacity .5s ease,visibility .5s ease}
+#loader.done{opacity:0;visibility:hidden;pointer-events:none}
+.ld-logo{display:flex;align-items:center;gap:14px}
+.ld-icon{width:52px;height:52px;background:var(--navy);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ld-text-wrap .ld-arabic{font-size:10px;color:var(--navy);font-family:serif;display:block;margin-bottom:2px}
+.ld-text-wrap .ld-spring{font-family:'Urbanist',sans-serif;font-weight:700;font-size:22px;letter-spacing:.08em;color:var(--red);line-height:1;display:block}
+.ld-text-wrap .ld-adv{font-size:9px;letter-spacing:.35em;color:var(--navy);display:block;margin-top:1px}
+.ld-bar{width:80px;height:2px;background:rgba(0,0,0,0.08);overflow:hidden;border-radius:2px}
+.ld-fill{height:100%;background:var(--red);width:0;animation:ldFill .5s ease forwards}
+@keyframes ldFill{to{width:100%}}
+
+/* PROGRESS */
+#progress{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--red);z-index:9999;pointer-events:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(1.5rem,5vw,4rem);height:76px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--border)}
+.nav-logo{display:flex;align-items:center;flex-shrink:0}
+.nav-logo img{height:48px;width:auto;object-fit:contain;display:block}
+.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
+.nav-links a{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);position:relative;transition:color .3s;font-weight:500}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--red);transition:width .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--red)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 2rem;border-radius:8px;font-family:'Urbanist',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:none;transition:all .3s;text-decoration:none;cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+.btn-p{background:var(--red);color:#fff;box-shadow:0 4px 20px rgba(192,30,42,.25)}
+.btn-p:hover{background:#a8181f}
+.btn-o{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.btn-o:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.hbg{display:none;flex-direction:column;gap:5px;width:24px;background:none;border:none;padding:0;z-index:1001;cursor:pointer}
+.hbg span{display:block;width:100%;height:1.5px;background:var(--text);transition:all .4s cubic-bezier(.23,1,.32,1);transform-origin:center}
+.hbg.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hbg.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hbg.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mob-menu{position:fixed;inset:0;z-index:999;background:var(--navy);clip-path:circle(0% at calc(100% - 44px) 44px);transition:clip-path .7s cubic-bezier(.77,0,.175,1);display:flex;flex-direction:column;justify-content:center;padding:clamp(2rem,8vw,5rem);overflow:hidden}
+.mob-menu.open{clip-path:circle(160% at calc(100% - 44px) 44px)}
+.mob-links{list-style:none;margin-bottom:3rem}
+.mob-links li{overflow:hidden}
+.mob-links a{display:block;font-family:'Cormorant Garant',serif;font-weight:700;font-size:clamp(2.5rem,9vw,5rem);color:rgba(255,255,255,.3);line-height:1.1;padding:.15em 0;transform:translateY(110%);transition:transform .6s cubic-bezier(.23,1,.32,1),color .3s}
+.mob-menu.open .mob-links a{transform:translateY(0)}
+.mob-links li:nth-child(1) a{transition-delay:.1s}.mob-links li:nth-child(2) a{transition-delay:.16s}.mob-links li:nth-child(3) a{transition-delay:.22s}.mob-links li:nth-child(4) a{transition-delay:.28s}.mob-links li:nth-child(5) a{transition-delay:.34s}.mob-links li:nth-child(6) a{transition-delay:.40s}
+.mob-links a:hover{color:#fff}
+.mob-contact{opacity:0;transition:opacity .4s .4s;font-size:.85rem;color:rgba(255,255,255,.5);display:flex;flex-direction:column;gap:.4rem}
+.mob-menu.open .mob-contact{opacity:1}
+
+/* REVEAL */
+.rev{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.23,1,.32,1)}
+.rev.in{opacity:1;transform:translateY(0)}
+.rv-l{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s cubic-bezier(.23,1,.32,1)}
+.rv-l.in{opacity:1;transform:translateX(0)}
+.rv-r{opacity:0;transform:translateX(30px);transition:opacity .7s ease,transform .7s cubic-bezier(.23,1,.32,1)}
+.rv-r.in{opacity:1;transform:translateX(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+.d5{transition-delay:.08s}.d6{transition-delay:.16s}.d7{transition-delay:.24s}.d8{transition-delay:.32s}
+
+/* LABEL */
+.label{display:inline-flex;align-items:center;gap:.6rem;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:1rem}
+.label::before{content:'';width:24px;height:1.5px;background:var(--red)}
+
+/* PAGE HEADER */
+.pg-header{padding-top:76px;background:var(--navy);position:relative;overflow:hidden;min-height:380px;display:flex;align-items:flex-end}
+.pg-header-img{position:absolute;inset:0;object-fit:cover;opacity:.18}
+.pg-header-content{position:relative;z-index:1;padding:clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,4rem);max-width:1300px;width:100%;display:flex;justify-content:space-between;align-items:flex-end;gap:3rem;flex-wrap:wrap}
+.pg-header-label{display:inline-flex;align-items:center;gap:.6rem;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1rem}
+.pg-header-label::before{content:'';width:20px;height:1px;background:var(--red)}
+.pg-header-h{font-family:'Cormorant Garant',serif;font-size:clamp(2.5rem,6vw,5.5rem);font-weight:700;color:#fff;line-height:.95;letter-spacing:-.02em}
+.pg-header-h em{color:rgba(255,255,255,.4);font-style:italic}
+.pg-header-right{font-size:.88rem;color:rgba(255,255,255,.45);max-width:320px;line-height:1.8}
+
+/* SERVICES GRID */
+#services{padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem)}
+.srv-intro{max-width:1300px;margin:0 auto 3.5rem;display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap}
+.srv-intro-title{font-family:'Cormorant Garant',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:var(--navy);letter-spacing:-.02em}
+.srv-count{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1300px;margin:0 auto}
+
+/* SERVICE CARD — image overlay style */
+.srv-card{position:relative;overflow:hidden;border-radius:16px;height:380px;display:block;text-decoration:none}
+.srv-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.23,1,.32,1)}
+.srv-card:hover img{transform:scale(1.07)}
+.srv-card-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,52,97,.95) 0%,rgba(28,52,97,.5) 45%,rgba(0,0,0,.1) 100%);transition:opacity .4s}
+.srv-card:hover .srv-card-grad{background:linear-gradient(to top,rgba(28,52,97,1) 0%,rgba(28,52,97,.6) 50%,rgba(0,0,0,.2) 100%)}
+.srv-card-body{position:absolute;bottom:0;left:0;right:0;padding:2rem}
+.srv-card-num{font-size:.6rem;letter-spacing:.2em;color:rgba(255,255,255,.4);margin-bottom:.6rem;font-weight:600}
+.srv-card-name{font-family:'Cormorant Garant',serif;font-size:1.4rem;font-weight:700;color:#fff;line-height:1.15;margin-bottom:1rem}
+.srv-card-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);font-weight:600;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:.2rem;opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s,color .25s}
+.srv-card:hover .srv-card-link{opacity:1;transform:translateY(0);color:#fff}
+
+/* WIDE CARD — first in 2-col span */
+.srv-card.wide{grid-column:span 2}
+.srv-card.wide .srv-card-name{font-size:1.8rem}
+
+/* PROCESS */
+#process{padding:clamp(5rem,8vw,8rem) clamp(1.5rem,5vw,4rem);background:var(--bg2)}
+.proc-wrap{max-width:1200px;margin:0 auto}
+.proc-head{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-bottom:4rem;align-items:end}
+.proc-title{font-family:'Cormorant Garant',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:var(--navy);letter-spacing:-.02em}
+.proc-sub{color:var(--text2);font-size:.92rem;line-height:1.85}
+.proc-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem}
+.proc-step{padding:2rem;background:var(--bg);border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.05);transition:transform .3s,box-shadow .3s}
+.proc-step:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.09)}
+.proc-step-n{font-family:'Cormorant Garant',serif;font-size:3rem;font-weight:700;color:rgba(28,52,97,.08);line-height:1;margin-bottom:.75rem}
+.proc-step-name{font-family:'Cormorant Garant',serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.proc-step-desc{font-size:.82rem;color:var(--muted);line-height:1.7}
+
+/* CTA */
+#cta{padding:clamp(5rem,8vw,7rem) clamp(1.5rem,5vw,4rem);background:var(--navy);position:relative;overflow:hidden}
+.cta-img{position:absolute;inset:0;object-fit:cover;opacity:.12}
+.cta-inner{position:relative;z-index:1;max-width:700px;margin:0 auto;text-align:center}
+.cta-title{font-family:'Cormorant Garant',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:1rem;line-height:1.05}
+.cta-title em{color:rgba(1,154,152,.9);font-style:italic}
+.cta-sub{font-size:.9rem;color:rgba(255,255,255,.5);margin-bottom:2.5rem}
+.cta-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+
+/* TICKER */
+.ticker{background:var(--red);overflow:hidden;padding:.8rem 0}
+.t-track{display:flex;width:max-content;animation:tick 22s linear infinite}
+.t-item{white-space:nowrap;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.85);padding:0 2.5rem;font-weight:500}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* FOOTER */
+footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(1.5rem,5vw,4rem) 2rem}
+.ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:4rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:2rem}
+.ft-logo{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem}
+.ft-logo .icon{width:40px;height:40px;background:rgba(255,255,255,.1);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ft-logo .name-wrap .spring{display:block;font-family:'Urbanist',sans-serif;font-weight:700;font-size:15px;letter-spacing:.06em;color:#fff;line-height:1.1}
+.ft-logo .name-wrap .adv{display:block;font-size:7px;letter-spacing:.3em;color:rgba(255,255,255,.4);text-transform:uppercase}
+.ft-tagline{font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.7;max-width:220px}
+.ft-col-h{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:1.25rem}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.ft-links a{font-size:.88rem;color:rgba(255,255,255,.5);transition:color .3s}
+.ft-links a:hover{color:#fff}
+.ft-bottom{display:flex;justify-content:space-between;align-items:center}
+.ft-copy{font-size:.72rem;color:rgba(255,255,255,.3)}
+.ft-soc{display:flex;gap:1.25rem;align-items:center}
+.ft-soc a{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);transition:color .3s}
+.ft-soc a:hover{color:#fff}
+.ft-admin{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-left:1.5rem;border-left:1px solid rgba(255,255,255,.1);padding-left:1.5rem;transition:color .3s}
+.ft-admin:hover{color:rgba(255,255,255,.5)}
+
+@media(max-width:1100px){.srv-grid{grid-template-columns:1fr 1fr}.srv-card.wide{grid-column:auto}.srv-card.wide .srv-card-name{font-size:1.4rem}.proc-steps{grid-template-columns:1fr 1fr}.proc-head{grid-template-columns:1fr}.ft-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.nav-links{display:none}.hbg{display:flex}.srv-grid{grid-template-columns:1fr}.proc-steps{grid-template-columns:1fr}.ft-grid{grid-template-columns:1fr}.ft-bottom{flex-direction:column;gap:1rem;text-align:center}.pg-header-content{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <img src="logo.png" alt="Springs Advertising LLC" style="height:80px;object-fit:contain">
+  <div class="ld-bar"><div class="ld-fill"></div></div>
+</div>
+
+<div id="progress"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="Springs Advertising LLC">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about-us.html">About</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="contact-us.html" class="btn btn-p" style="padding:.55rem 1.4rem;font-size:.7rem">Get a Quote</a></li>
+  </ul>
+  <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mob-menu" id="mob">
+  <ul class="mob-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about-us.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="contact-us.html">Contact</a></li>
+  </ul>
+  <div class="mob-contact"><span>info@springsadvt.com</span><span>+971 556 622 949</span></div>
+</div>
+
+<header class="pg-header">
+  <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&h=700&fit=crop&q=80" alt="" class="pg-header-img">
+  <div class="pg-header-content">
+    <div>
+      <div class="pg-header-label">What We Do</div>
+      <h1 class="pg-header-h">Our<br><em>Services</em></h1>
+    </div>
+    <p class="pg-header-right">From design and fabrication to installation and maintenance — we handle every stage of your signage project in-house.</p>
+  </div>
+</header>
+
+<section id="services">
+  <div class="srv-intro">
+    <div class="rv-l">
+      <div class="label">16 Capabilities</div>
+      <h2 class="srv-intro-title">Complete Signage Solutions</h2>
+    </div>
+    <div class="srv-count rev">Serving Abu Dhabi since 1977</div>
+  </div>
+
+  <div class="srv-grid">
+    <!-- Row 1 -->
+    <a href="service-detail.html?s=vehicle-graphics" class="srv-card wide rev">
+      <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=900&h=500&fit=crop&q=80" alt="Vehicle Graphics">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">01</div>
+        <div class="srv-card-name">Vehicle Graphics</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+    <a href="service-detail.html?s=outdoor-business-sign" class="srv-card rev d1">
+      <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&h=600&fit=crop&q=80" alt="Outdoor & Business Sign">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">02</div>
+        <div class="srv-card-name">Outdoor &amp; Business Sign</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+
+    <!-- Row 2 -->
+    <a href="service-detail.html?s=internal-signs" class="srv-card rev">
+      <img src="https://images.unsplash.com/photo-1497366754035-f200581393ab?w=600&h=600&fit=crop&q=80" alt="Internal Signs">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">03</div>
+        <div class="srv-card-name">Internal Signs</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+    <a href="service-detail.html?s=lettering" class="srv-card rev d1">
+      <img src="https://images.unsplash.com/photo-1614680376408-81e91ffe3db7?w=600&h=600&fit=crop&q=80" alt="Lettering">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">04</div>
+        <div class="srv-card-name">Lettering</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+    <a href="service-detail.html?s=window-graphics" class="srv-card rev d2">
+      <img src="https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=600&h=600&fit=crop&q=80" alt="Window Graphics">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">05</div>
+        <div class="srv-card-name">Window Graphics</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+
+    <!-- Row 3 -->
+    <a href="service-detail.html?s=digital-vinyl" class="srv-card rev">
+      <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=600&h=600&fit=crop&q=80" alt="Digital Printed Vinyl">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">06</div>
+        <div class="srv-card-name">Digital Printed Vinyl Stickers &amp; Labels</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+    <a href="service-detail.html?s=banners-flex" class="srv-card wide rev d1">
+      <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&h=500&fit=crop&q=80" alt="Banners & Flex">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">07</div>
+        <div class="srv-card-name">Banners &amp; Flex</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+
+    <!-- Row 4 -->
+    <a href="service-detail.html?s=direction-wayfinding" class="srv-card rev">
+      <img src="https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=600&h=600&fit=crop&q=80" alt="Direction & Wayfinding">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">08</div>
+        <div class="srv-card-name">Direction &amp; Wayfinding Signs</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+    <a href="service-detail.html?s=promotional-signage" class="srv-card rev d1">
+      <img src="https://images.unsplash.com/photo-1461117824904-7bdf2e16b6b2?w=600&h=600&fit=crop&q=80" alt="Promotional Signage">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">09</div>
+        <div class="srv-card-name">Promotional Signage</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+    <a href="service-detail.html?s=posters-printing" class="srv-card rev d2">
+      <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=600&fit=crop&q=80" alt="Posters Printing">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">10</div>
+        <div class="srv-card-name">Posters Printing</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+
+    <!-- Row 5 -->
+    <a href="service-detail.html?s=print-products" class="srv-card rev">
+      <img src="https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?w=600&h=600&fit=crop&q=80" alt="Print Products">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">11</div>
+        <div class="srv-card-name">Print Products</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+    <a href="service-detail.html?s=installation-maintenance" class="srv-card rev d1">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=600&fit=crop&q=80" alt="Installation & Maintenance">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">12</div>
+        <div class="srv-card-name">Installation &amp; Maintenance</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+    <a href="service-detail.html?s=branding-design" class="srv-card rev d2">
+      <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&h=600&fit=crop&q=80" alt="Branding & Design">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">13</div>
+        <div class="srv-card-name">Branding &amp; Design</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+
+    <!-- Row 6 -->
+    <a href="service-detail.html?s=engraving-etching" class="srv-card wide rev">
+      <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=900&h=500&fit=crop&q=80" alt="Engraving & Etching">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">14</div>
+        <div class="srv-card-name">Engraving &amp; Etching</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+    <a href="service-detail.html?s=health-safety" class="srv-card rev d1">
+      <img src="https://images.unsplash.com/photo-1585399000684-d2f72660f092?w=600&h=600&fit=crop&q=80" alt="Health & Safety Signs">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">15</div>
+        <div class="srv-card-name">Health &amp; Safety Signs</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+
+    <!-- Row 7 -->
+    <a href="service-detail.html?s=sneeze-guard" class="srv-card rev" style="grid-column:1/-1;height:280px;max-width:900px;margin:0 auto;width:100%">
+      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=400&fit=crop&q=80" alt="Sneeze Guard">
+      <div class="srv-card-grad"></div>
+      <div class="srv-card-body">
+        <div class="srv-card-num">16</div>
+        <div class="srv-card-name" style="font-size:1.8rem">Custom Made Sneeze Guard</div>
+        <div class="srv-card-link">View Service →</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section id="process">
+  <div class="proc-wrap">
+    <div class="proc-head">
+      <div class="rv-l">
+        <div class="label">How We Work</div>
+        <h2 class="proc-title">From Brief to Installation</h2>
+      </div>
+      <p class="proc-sub rv-r">A streamlined, fully in-house process means you have one point of contact from start to finish — and consistent quality every step of the way.</p>
+    </div>
+    <div class="proc-steps">
+      <div class="proc-step rev"><div class="proc-step-n">01</div><div class="proc-step-name">Brief</div><p class="proc-step-desc">We listen to your goals and visit the site to understand the context.</p></div>
+      <div class="proc-step rev d1"><div class="proc-step-n">02</div><div class="proc-step-name">Design</div><p class="proc-step-desc">Our designers produce detailed visuals and technical drawings for approval.</p></div>
+      <div class="proc-step rev d2"><div class="proc-step-n">03</div><div class="proc-step-name">Fabricate</div><p class="proc-step-desc">In-house production using modern machinery and quality materials.</p></div>
+      <div class="proc-step rev d3"><div class="proc-step-n">04</div><div class="proc-step-name">Install</div><p class="proc-step-desc">Our certified team handles delivery, fitting and commissioning.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&h=600&fit=crop&q=80" alt="" class="cta-img">
+  <div class="cta-inner rev">
+    <div class="label" style="color:rgba(255,255,255,.35);justify-content:center">Get Started</div>
+    <h2 class="cta-title">Ready to Make<br><em>Your Mark?</em></h2>
+    <p class="cta-sub">Talk to our team about your next project.</p>
+    <div class="cta-btns">
+      <a href="contact-us.html" class="btn btn-p">Get a Quote</a>
+      <a href="projects.html" class="btn btn-o">View Our Work</a>
+    </div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="t-track">
+    <span class="t-item">Vehicle Graphics</span><span class="t-item">·</span><span class="t-item">LED Illumination</span><span class="t-item">·</span><span class="t-item">Wayfinding</span><span class="t-item">·</span><span class="t-item">Digital Printing</span><span class="t-item">·</span><span class="t-item">Exhibition Displays</span><span class="t-item">·</span><span class="t-item">Engraving & Etching</span><span class="t-item">·</span><span class="t-item">Vehicle Graphics</span><span class="t-item">·</span><span class="t-item">LED Illumination</span><span class="t-item">·</span><span class="t-item">Wayfinding</span><span class="t-item">·</span><span class="t-item">Digital Printing</span><span class="t-item">·</span><span class="t-item">Exhibition Displays</span><span class="t-item">·</span><span class="t-item">Engraving & Etching</span><span class="t-item">·</span>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-grid">
+    <div>
+      <div class="ft-logo">
+        <div class="icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M2 19 C6 15, 10 11, 12 9 C14 7, 18 4, 22 2" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M2 23 C7 18, 11 14, 13 11 C15 8, 19 4, 22 2" stroke="#019a98" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="name-wrap">
+          <span class="spring">SPRING</span>
+          <span class="adv">Advertising LLC</span>
+        </div>
+      </div>
+      <p class="ft-tagline">Abu Dhabi's trusted signage manufacturer since 1977.</p>
+    </div>
+    <div>
+      <div class="ft-col-h">Navigation</div>
+      <ul class="ft-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about-us.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="admin.html" style="opacity:.45;font-size:.8rem">Admin Panel</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft-col-h">Contact</div>
+      <ul class="ft-links">
+        <li><a href="mailto:info@springsadvt.com">info@springsadvt.com</a></li>
+        <li><a href="tel:+971556622949">+971 556 622 949</a></li>
+        <li><a href="contact-us.html">Abu Dhabi, UAE</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <p class="ft-copy">© 2024 Springs Advertising LLC. All rights reserved.</p>
+    <div class="ft-soc">
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Facebook</a>
+      <a href="admin.html" class="ft-admin">Admin ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const loader=document.getElementById('loader');
+if(sessionStorage.getItem('ld')){loader.style.display='none'}
+else{setTimeout(()=>{loader.classList.add('done');sessionStorage.setItem('ld','1')},500)}
+window.addEventListener('scroll',()=>{const p=document.getElementById('progress');p.style.width=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%'});
+const hbg=document.getElementById('hbg'),mob=document.getElementById('mob');
+hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mob.classList.toggle('open')});
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.rev,.rv-l,.rv-r').forEach(el=>io.observe(el));
+
+// IMAGE OVERRIDES
+(function(){var s;try{s=JSON.parse(localStorage.getItem('springs_images')||'{}')}catch{s={}}
+function q(sel,k){if(!s[k])return;var e=document.querySelector(sel);if(e)e.src=s[k]}
+function qci(sel,n,k){if(!s[k])return;var es=document.querySelectorAll(sel);if(es[n]){var i=es[n].querySelector('img');if(i)i.src=s[k]}}
+q('.pg-header-img','srv_header');q('.cta-img','srv_cta');
+for(var i=0;i<16;i++)qci('.srv-card',i,'srv_card_'+(i+1));})();
+</script>
+</body>
+</html>

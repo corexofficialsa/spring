@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed -n '340,360p' \"/Users/muhammed/Documents/spring advt/about-us.html\")",
+      "Bash(sed -n '488,520p' \"/Users/muhammed/Documents/spring advt/about-us.html\")",
+      "Bash(sed -n '370,400p' \"/Users/muhammed/Documents/spring advt/careers.html\")",
+      "Bash(sed -n '340,365p' \"/Users/muhammed/Documents/spring advt/careers.html\")",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(grep -v \"\\\\.html$\")"
+    ]
+  }
+}
