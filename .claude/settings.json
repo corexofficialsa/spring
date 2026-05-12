@@ -6,7 +6,8 @@
       "Bash(sed -n '370,400p' \"/Users/muhammed/Documents/spring advt/careers.html\")",
       "Bash(sed -n '340,365p' \"/Users/muhammed/Documents/spring advt/careers.html\")",
       "Bash(echo \"EXIT:$?\")",
-      "Bash(grep -v \"\\\\.html$\")"
+      "Bash(grep -v \"\\\\.html$\")",
+      "Bash(node -e \"const fs=require\\('fs'\\);const h=fs.readFileSync\\('/Users/muhammed/Documents/spring advt/admin.html','utf8'\\);const m=h.match\\(/<script>/g\\);console.log\\('script tags:',m&&m.length\\);const s=h.match\\(/<\\\\/script>/g\\);console.log\\('closing script tags:',s&&s.length\\);console.log\\('lines:',h.split\\('\\\\n'\\).length\\);\")"
     ]
   }
 }
