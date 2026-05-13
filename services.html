@@ -166,6 +166,7 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
 @media(max-width:1100px){.srv-grid{grid-template-columns:1fr 1fr}.srv-card.wide{grid-column:auto}.srv-card.wide .srv-card-name{font-size:1.4rem}.proc-steps{grid-template-columns:1fr 1fr}.proc-head{grid-template-columns:1fr}.ft-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:768px){.nav-links{display:none}.hbg{display:flex}.srv-grid{grid-template-columns:1fr}.proc-steps{grid-template-columns:1fr}.ft-grid{grid-template-columns:1fr}.ft-bottom{flex-direction:column;gap:1rem;text-align:center}.pg-header-content{flex-direction:column;align-items:flex-start}}
 </style>
+<script src="images-config.js" onerror="window.SPRING_IMAGES=window.SPRING_IMAGES||{}"></script>
 </head>
 <body>
 
@@ -480,7 +481,8 @@ const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersect
 document.querySelectorAll('.rev,.rv-l,.rv-r').forEach(el=>io.observe(el));
 
 // IMAGE OVERRIDES
-(function(){var s;try{s=JSON.parse(localStorage.getItem('springs_images')||'{}')}catch{s={}}
+(function(){var _lc={};try{_lc=JSON.parse(localStorage.getItem('springs_images')||'{}')}catch{}
+var s=Object.assign({},window.SPRING_IMAGES||{},_lc);
 function q(sel,k){if(!s[k])return;var e=document.querySelector(sel);if(e)e.src=s[k]}
 function qci(sel,n,k){if(!s[k])return;var es=document.querySelectorAll(sel);if(es[n]){var i=es[n].querySelector('img');if(i)i.src=s[k]}}
 q('.pg-header-img','srv_header');q('.cta-img','srv_cta');

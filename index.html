@@ -232,6 +232,7 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
 }
 @media(max-width:480px){.stats-bar{grid-template-columns:1fr 1fr}}
 </style>
+<script src="images-config.js" onerror="window.SPRING_IMAGES=window.SPRING_IMAGES||{}"></script>
 </head>
 <body>
 
@@ -515,7 +516,8 @@ const cobs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){animCt
 document.querySelectorAll('.ctr').forEach(el=>cobs.observe(el));
 
 // IMAGE OVERRIDES
-(function(){var s;try{s=JSON.parse(localStorage.getItem('springs_images')||'{}')}catch{s={}}
+(function(){var _lc={};try{_lc=JSON.parse(localStorage.getItem('springs_images')||'{}')}catch{}
+var s=Object.assign({},window.SPRING_IMAGES||{},_lc);
 function q(sel,k){if(!s[k])return;var e=document.querySelector(sel);if(e)e.src=s[k]}
 function qci(sel,n,k){if(!s[k])return;var es=document.querySelectorAll(sel);if(es[n]){var i=es[n].querySelector('img');if(i)i.src=s[k]}}
 q('.hero-img','idx_hero');

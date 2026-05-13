@@ -202,17 +202,18 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
   .nav-links{display:none}.hbg{display:flex}
   .story-img-accent{display:none}
   .team-grid{grid-template-columns:1fr}
-  .tl-body::before{left:0}
+  .tl-body::before{left:20px;transform:none}
   .tl-row{grid-template-columns:40px 1fr;gap:0}
-  .tl-left{display:none}
-  .tl-right{padding-left:1.5rem}
-  .tl-dot{margin:0}
+  .tl-dot{grid-column:1;grid-row:1;margin:0;margin-top:.55rem}
+  .tl-left{display:block;grid-column:2;grid-row:1;text-align:left;padding:.4rem 0 0 1.5rem;padding-right:0}
+  .tl-right{grid-column:2;grid-row:1;padding-left:1.5rem}
   .num-grid{grid-template-columns:1fr 1fr}
   .ft-grid{grid-template-columns:1fr}
   .ft-bottom{flex-direction:column;gap:1rem;text-align:center}
   .val-grid{grid-template-columns:1fr}
 }
 </style>
+<script src="images-config.js" onerror="window.SPRING_IMAGES=window.SPRING_IMAGES||{}"></script>
 </head>
 <body>
 
@@ -488,7 +489,8 @@ const co=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersect
 document.querySelectorAll('[data-target]').forEach(el=>co.observe(el));
 
 // IMAGE OVERRIDES
-(function(){var s;try{s=JSON.parse(localStorage.getItem('springs_images')||'{}')}catch{s={}}
+(function(){var _lc={};try{_lc=JSON.parse(localStorage.getItem('springs_images')||'{}')}catch{}
+var s=Object.assign({},window.SPRING_IMAGES||{},_lc);
 function q(sel,k){if(!s[k])return;var e=document.querySelector(sel);if(e)e.src=s[k]}
 function qn(sel,n,k){if(!s[k])return;var es=document.querySelectorAll(sel);if(es[n])es[n].src=s[k]}
 q('.pg-header-img','about_header');
