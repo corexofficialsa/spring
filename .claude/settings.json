@@ -7,7 +7,24 @@
       "Bash(sed -n '340,365p' \"/Users/muhammed/Documents/spring advt/careers.html\")",
       "Bash(echo \"EXIT:$?\")",
       "Bash(grep -v \"\\\\.html$\")",
-      "Bash(node -e \"const fs=require\\('fs'\\);const h=fs.readFileSync\\('/Users/muhammed/Documents/spring advt/admin.html','utf8'\\);const m=h.match\\(/<script>/g\\);console.log\\('script tags:',m&&m.length\\);const s=h.match\\(/<\\\\/script>/g\\);console.log\\('closing script tags:',s&&s.length\\);console.log\\('lines:',h.split\\('\\\\n'\\).length\\);\")"
+      "Bash(node -e \"const fs=require\\('fs'\\);const h=fs.readFileSync\\('/Users/muhammed/Documents/spring advt/admin.html','utf8'\\);const m=h.match\\(/<script>/g\\);console.log\\('script tags:',m&&m.length\\);const s=h.match\\(/<\\\\/script>/g\\);console.log\\('closing script tags:',s&&s.length\\);console.log\\('lines:',h.split\\('\\\\n'\\).length\\);\")",
+      "Bash(grep -n '^nav{' '/Users/muhammed/Documents/spring advt/__TRACKED_VAR__.html')",
+      "Bash(grep -n 'nav-links\\\\|hbg.*id\\\\|nav-logo\\\\|</nav>' '/Users/muhammed/Documents/spring advt/__TRACKED_VAR__.html')",
+      "Bash(sed -i '' 's/data-t=\"500\"/data-t=\"2000\"/g' \"/Users/muhammed/Documents/spring advt/index.html\")",
+      "Bash(sed -i '' 's/data-t=\"100\"/data-t=\"1000\"/g' \"/Users/muhammed/Documents/spring advt/index.html\")",
+      "Bash(python3)",
+      "Bash(python3 -)",
+      "Bash(grep -c nav-right '/Users/muhammed/Documents/spring advt/__TRACKED_VAR__.html')",
+      "Bash(grep -c float-btns '/Users/muhammed/Documents/spring advt/__TRACKED_VAR__.html')",
+      "Bash(grep -c 'position:absolute.*left:50%\\\\|left:50%.*transform:translate' '/Users/muhammed/Documents/spring advt/__TRACKED_VAR__.html')",
+      "Bash(grep -c 'Nationwide\\\\|nationwide' '/Users/muhammed/Documents/spring advt/__TRACKED_VAR__.html')",
+      "Bash(grep -c 'Fabrication\\\\|fabrication' '/Users/muhammed/Documents/spring advt/__TRACKED_VAR__.html')",
+      "Bash(grep -n 'Abu Dhabi\\\\|abu dhabi\\\\|Abu dhabi' '/Users/muhammed/Documents/spring advt/__TRACKED_VAR__.html')",
+      "Bash(grep -n 'nav-links\\\\|nav-right\\\\|nav-info' '/Users/muhammed/Documents/spring advt/__TRACKED_VAR__.html')",
+      "Bash(grep -n 'nav-info\\\\|556622949\\\\|nav-right\\\\|hamburger\\\\|ham-btn' '/Users/muhammed/Documents/spring advt/__TRACKED_VAR__.html')",
+      "Bash(grep -n 'nav{.*\\\\|nav {.*\\\\|\\\\.nav-w\\\\|#nav\\\\|<nav\\\\b\\\\|nav class\\\\|position:relative' '/Users/muhammed/Documents/spring advt/__TRACKED_VAR__.html')",
+      "Bash(grep -n '^nav{.*\\\\|^nav {.*\\\\|nav{display\\\\|^#nav{' '/Users/muhammed/Documents/spring advt/__TRACKED_VAR__.html')",
+      "Bash(grep -n 'Abu Dhabi' '/Users/muhammed/Documents/spring advt/__TRACKED_VAR__.html')"
     ]
   }
 }

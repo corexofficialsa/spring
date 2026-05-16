@@ -41,14 +41,19 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(1.5rem,5vw,4rem);height:76px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--border)}
 .nav-logo{display:flex;align-items:center;flex-shrink:0}
 .nav-logo img{height:48px;width:auto;object-fit:contain;display:block}
-.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
+.nav-links{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:2.2rem;list-style:none}
 .nav-links a{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);position:relative;transition:color .3s;font-weight:500}
 .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--red);transition:width .3s}
 .nav-links a:hover,.nav-links a.active{color:var(--red)}
 .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:1.25rem;flex-shrink:0}
+.nav-info{display:flex;align-items:center;gap:1.25rem}
+.nav-info a{font-size:.68rem;color:var(--text2);display:flex;align-items:center;gap:.38rem;transition:color .3s;letter-spacing:.03em;white-space:nowrap}
+.nav-info a:hover{color:var(--red)}
+@media(max-width:1024px){.nav-info{display:none}}
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 2rem;border-radius:8px;font-family:'Urbanist',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:none;position:relative;transition:all .3s;text-decoration:none}
 .btn:hover{transform:translateY(-2px)}
-.btn-p{background:var(--red);color:#fff;box-shadow:0 4px 20px rgba(192,30,42,.25)}
+.btn-p{background:var(--red);color:#fff!important;box-shadow:0 4px 20px rgba(192,30,42,.25)}
 .btn-p:hover{background:#a8181f}
 .btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--border)}
 .btn-ghost:hover{border-color:var(--navy)}
@@ -151,6 +156,13 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
 
 @media(max-width:1024px){.svc-g{grid-template-columns:1fr;gap:3rem}.svc-img-wrap{position:static;height:380px}.os-grid{grid-template-columns:1fr 1fr}.ft-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:768px){.nav-links{display:none}.hbg{display:flex}.os-grid{grid-template-columns:1fr}.ft-grid{grid-template-columns:1fr}.ft-bottom{flex-direction:column;gap:1rem;text-align:center}.svc-btns{flex-direction:column;width:max-content}}
+
+  /* Floating contact buttons */
+  .float-btns{position:fixed;bottom:2rem;right:1.5rem;display:flex;flex-direction:column;gap:.75rem;z-index:900}
+  .float-btn{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;color:#fff;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.25);transition:transform .2s,box-shadow .2s}
+  .float-btn:hover{transform:scale(1.12);box-shadow:0 6px 18px rgba(0,0,0,.3)}
+  .float-wa{background:#25d366}
+  .float-ph{background:#0a2342}
 </style>
 <script src="images-config.js" onerror="window.SPRING_IMAGES=window.SPRING_IMAGES||{}"></script>
 </head>
@@ -175,7 +187,13 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
     <li><a href="careers.html">Careers</a></li>
     <li><a href="contact-us.html" class="btn btn-p" style="padding:.55rem 1.4rem;font-size:.7rem">Get a Quote</a></li>
   </ul>
-  <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+  <div class="nav-right">
+    <div class="nav-info">
+      <a href="tel:+971556622949"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 9.81 19.79 19.79 0 011.22 1 2 2 0 013 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+971 556 622 949</a>
+      <a href="mailto:info@springsadvt.com"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@springsadvt.com</a>
+    </div>
+    <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+  </div>
 </nav>
 
 <div class="mob-menu" id="mob">
@@ -233,11 +251,11 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
 <div class="ticker">
   <div class="t-track">
     <span class="t-item">Signage Specialists</span><span class="t-item">·</span>
-    <span class="t-item">Est. Abu Dhabi 1977</span><span class="t-item">·</span>
-    <span class="t-item">Design · Manufacture · Install</span><span class="t-item">·</span>
+    <span class="t-item">Est. UAE 1977</span><span class="t-item">·</span>
+    <span class="t-item">Design · Fabrication · Install</span><span class="t-item">·</span>
     <span class="t-item">Signage Specialists</span><span class="t-item">·</span>
-    <span class="t-item">Est. Abu Dhabi 1977</span><span class="t-item">·</span>
-    <span class="t-item">Design · Manufacture · Install</span><span class="t-item">·</span>
+    <span class="t-item">Est. UAE 1977</span><span class="t-item">·</span>
+    <span class="t-item">Design · Fabrication · Install</span><span class="t-item">·</span>
   </div>
 </div>
 
@@ -256,7 +274,7 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
           <span class="adv">Advertising LLC</span>
         </div>
       </div>
-      <p class="ft-tagline">Abu Dhabi's trusted signage manufacturer since 1977.</p>
+      <p class="ft-tagline">UAE's trusted signage fabricator since 1977.</p>
     </div>
     <div>
       <div class="ft-col-h">Navigation</div>
@@ -310,18 +328,18 @@ document.querySelectorAll('.rev,.rv-l,.rv-r').forEach(el=>io.observe(el));
 const SERVICES={
   'vehicle-graphics':{name:'Vehicle Graphics',tag:'Fleet wraps · Vinyl lettering · Full vehicle branding',desc:'Full fleet wraps, partial vehicle graphics and precision-cut vinyl lettering — all UV-protected for the UAE climate. Whether branding a single vehicle or an entire fleet, our graphics are produced and installed to the highest standard. Our design team can develop your artwork, or we can work from supplied files.',img:'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=1200&h=800&fit=crop&q=80',list:null},
   'outdoor-business-sign':{name:'Outdoor & Business Sign',tag:'Professional · Reliable · Capable',desc:'Serving high-profile clients since 1977, our skilled sign makers and qualified electricians provide on-demand service ensuring your signs are never out of action. We offer energy-efficient LED solutions and scheduled maintenance contracts, operating to full industry certification — delivering quality signage on time, every time.',img:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&h=800&fit=crop&q=80',list:null},
-  'internal-signs':{name:'Internal Signs',tag:'Creating the right impression from first contact',desc:'Internal signage is essential to a great first impression for visitors and customers. We visit on-site to discuss your brief, offer inspiration and highlight challenges before a design template is created for approval. The final product is then manufactured, delivered and installed — for one-off promotions or permanent installations.',img:'https://images.unsplash.com/photo-1497366754035-f200581393ab?w=1200&h=800&fit=crop&q=80',list:null},
-  'lettering':{name:'Lettering',tag:'Maximum impact through precision craftsmanship',desc:'Built-up lettering delivers a striking, imposing design style — subtle yet powerful, with maximum impact. Our production unit manufactures bespoke aluminium, steel, acrylic or timber lettering, carefully considering size, shape, colour and location for your brand.',img:'https://images.unsplash.com/photo-1614680376408-81e91ffe3db7?w=1200&h=800&fit=crop&q=80',list:['3D Moulded Lettering','Flat Cut Lettering','Build-Up Lettering','3D LED-Lit Lettering','Vinyl Lettering']},
+  'internal-signs':{name:'Internal Signs',tag:'Creating the right impression from first contact',desc:'Internal signage is essential to a great first impression for visitors and customers. We visit on-site to discuss your brief, offer inspiration and highlight challenges before a design template is created for approval. The final product is then fabricationd, delivered and installed — for one-off promotions or permanent installations.',img:'https://images.unsplash.com/photo-1497366754035-f200581393ab?w=1200&h=800&fit=crop&q=80',list:null},
+  'lettering':{name:'Lettering',tag:'Maximum impact through precision craftsmanship',desc:'Built-up lettering delivers a striking, imposing design style — subtle yet powerful, with maximum impact. Our production unit fabrications bespoke aluminium, steel, acrylic or timber lettering, carefully considering size, shape, colour and location for your brand.',img:'https://images.unsplash.com/photo-1614680376408-81e91ffe3db7?w=1200&h=800&fit=crop&q=80',list:['3D Moulded Lettering','Flat Cut Lettering','Build-Up Lettering','3D LED-Lit Lettering','Vinyl Lettering']},
   'window-graphics':{name:'Window Graphics',tag:'Bespoke vinyl for shopfronts, offices and interiors',desc:'Vinyl window graphics give your shopfront, office or interior a bespoke, high-impact finish at an excellent cost-to-effect ratio. Available in a wide range of colours, they work for promotions and permanent brand displays alike. Supply a vector file or let our team design for you.',img:'https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=1200&h=800&fit=crop&q=80',list:null},
   'digital-vinyl':{name:'Digital Printed Vinyl Stickers & Labels',tag:'Full-colour prints on vinyl, PVC, magnetic and more',desc:'Using modern, durable printers we produce self-adhesive vinyl, PVC and magnetic prints in mono, spot or full colour. From sequential numbered labels to corporate logos, H&S stickers and domed labels — with flexible run sizes and no large minimum orders.',img:'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1200&h=800&fit=crop&q=80',list:null},
   'banners-flex':{name:'Banners & Flex',tag:'Wide-format digital printing for promotions and events',desc:'Wide-format digital colour printing translates any branding or imagery into eye-catching exterior signage. All banners are finished with bonded edges and nickel-plated eyelets — durable enough for repeated use at promotions, events and exhibitions of all scales.',img:'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=800&fit=crop&q=80',list:null},
-  'direction-wayfinding':{name:'Direction & Wayfinding Signs',tag:'Guiding people with clarity and brand consistency',desc:'We design and manufacture directional and wayfinding systems for pedestrians, vehicles and complex commercial environments. Clear, on-brand wayfinding improves visitor flow, reinforces your identity and ensures people always know exactly where to go.',img:'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=1200&h=800&fit=crop&q=80',list:null},
+  'direction-wayfinding':{name:'Direction & Wayfinding Signs',tag:'Guiding people with clarity and brand consistency',desc:'We design and fabrication directional and wayfinding systems for pedestrians, vehicles and complex commercial environments. Clear, on-brand wayfinding improves visitor flow, reinforces your identity and ensures people always know exactly where to go.',img:'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=1200&h=800&fit=crop&q=80',list:null},
   'promotional-signage':{name:'Promotional Signage',tag:'Portable, rugged and vividly printed',desc:'From indoor and outdoor event banners to hanging displays and exhibition graphics, our promotional signage is printed in-house using the latest digital technology. We also produce vinyl lettering and stickers for vehicles, windows and any solid surface — in countless colours and styles.',img:'https://images.unsplash.com/photo-1461117824904-7bdf2e16b6b2?w=1200&h=800&fit=crop&q=80',list:null},
-  'posters-printing':{name:'Posters Printing',tag:'Any size, any purpose — permanent or temporary',desc:'Perfect for permanent or temporary promotions, our posters are available in any size to suit your needs. We manufacture a wide variety of posters, stickers and labels using the latest print technology for sharp, vibrant results every time.',img:'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&h=800&fit=crop&q=80',list:null},
+  'posters-printing':{name:'Posters Printing',tag:'Any size, any purpose — permanent or temporary',desc:'Perfect for permanent or temporary promotions, our posters are available in any size to suit your needs. We fabrication a wide variety of posters, stickers and labels using the latest print technology for sharp, vibrant results every time.',img:'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&h=800&fit=crop&q=80',list:null},
   'print-products':{name:'Print Products',tag:'From signage to stationery — consistent brand identity',desc:'Beyond signage, we offer a full suite of print products to establish a consistent look across all your communications. From business cards to corporate stationery, we help your brand speak with one clear visual voice.',img:'https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?w=1200&h=800&fit=crop&q=80',list:['Business Cards','Leaflets','Catalogues','Flyers','Corporate Stationery','Postcards','Posters']},
   'installation-maintenance':{name:'Installation & Maintenance',tag:'Safe, professional installation and ongoing care',desc:'Our experienced team installs signs safely at height, coordinating site access and liaising with your contact throughout. We also remove and dispose of old signage at no extra cost. Scheduled maintenance contracts keep your signage looking brand-new year-round.',img:'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&h=800&fit=crop&q=80',list:null},
   'branding-design':{name:'Branding & Design',tag:'Identity that distinguishes and endures',desc:'Strong branding builds credibility, sets you apart from competitors and helps win customers for the long term. Our design team develops visual identities that reflect your business values — ensuring a consistent, professional appearance across signage, print and all communications.',img:'https://images.unsplash.com/photo-1558655146-d09347e92766?w=1200&h=800&fit=crop&q=80',list:null},
-  'engraving-etching':{name:'Engraving & Etching',tag:'Precision engraving in all materials',desc:'We manufacture nameplates, memorial plaques, office and hotel badges, control panels, valve tags and fascias by engraving in brass, plastic, aluminium, stainless steel, Perspex and more. Serving legal, medical, hotel, catering and industrial sectors across the UAE with the latest CAD/CAM technology.',img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&h=800&fit=crop&q=80',list:null},
+  'engraving-etching':{name:'Engraving & Etching',tag:'Precision engraving in all materials',desc:'We fabrication nameplates, memorial plaques, office and hotel badges, control panels, valve tags and fascias by engraving in brass, plastic, aluminium, stainless steel, Perspex and more. Serving legal, medical, hotel, catering and industrial sectors across the UAE with the latest CAD/CAM technology.',img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&h=800&fit=crop&q=80',list:null},
   'health-safety':{name:'Health & Safety Signs',tag:'Keeping your workplace compliant and safe',desc:'From no-smoking and fire exit signs to hazard and informational displays, we supply bespoke and standard H&S signage in durable materials suited to your environment. We also offer a free "signage health check" to evaluate your premises and suggest improvements.',img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&h=800&fit=crop&q=80',list:null},
   'sneeze-guard':{name:'Custom Made Sneeze Guard',tag:'Transparent protection for employees and customers',desc:'Our acrylic sneeze guards provide clear, professional protection for staff and visitors. Self-supporting shields use specially designed metal foot brackets for easy tabletop installation — no tools required. Hanging shields are also available where counter space is limited.',img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop&q=80',list:null}
 };
@@ -368,5 +386,20 @@ if(svc){
   document.getElementById('other-svcs').style.display='none';
 }
 </script>
+
+  <!-- FLOATING CONTACT BUTTONS -->
+  <div class="float-btns">
+    <a class="float-btn float-wa" href="https://wa.me/971556622949" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="26" height="26">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.141 1.535 5.876L.057 23.571a.75.75 0 0 0 .92.92l5.695-1.478A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 0 1-4.953-1.355l-.355-.211-3.683.956.976-3.567-.232-.368A9.713 9.713 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
+      </svg>
+    </a>
+    <a class="float-btn float-ph" href="tel:+971556622949" aria-label="Call us">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+        <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.01 21 3 13.99 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2z"/>
+      </svg>
+    </a>
+  </div>
 </body>
 </html>

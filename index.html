@@ -4,8 +4,8 @@
   <link rel="icon" type="image/png" href="favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Springs Advertising LLC — Signage Manufacturers, Abu Dhabi Since 1977</title>
-<meta name="description" content="Abu Dhabi's premier signage manufacturer since 1977. 3D signs, LED illuminated signs, vehicle graphics, wayfinding and more.">
+<title>Springs Advertising LLC — Signage Fabricators, UAE Since 1977</title>
+<meta name="description" content="UAE's premier signage fabricator since 1977. 3D signs, LED illuminated signs, vehicle graphics, wayfinding and more.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,600;0,700;1,400&family=Urbanist:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -48,16 +48,23 @@ nav.at-hero .hbg span{background:#fff}
 .nav-logo{display:flex;align-items:center;flex-shrink:0}
 .nav-logo img{height:48px;width:auto;object-fit:contain;display:block;border-radius:4px}
 nav.at-hero .nav-logo img{background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);padding:4px 8px;border-radius:6px}
-.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
+.nav-links{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:2.2rem;list-style:none}
 .nav-links a{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);position:relative;transition:color .3s;font-weight:500}
 .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--red);transition:width .3s}
 .nav-links a:hover,a.active{color:var(--red)}
 .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:1.25rem;flex-shrink:0}
+.nav-info{display:flex;align-items:center;gap:1.25rem}
+.nav-info a{font-size:.68rem;color:var(--text2);display:flex;align-items:center;gap:.38rem;transition:color .3s;letter-spacing:.03em;white-space:nowrap}
+.nav-info a:hover{color:var(--red)}
+nav.at-hero .nav-info a{color:rgba(255,255,255,.7)}
+nav.at-hero .nav-info a:hover{color:#fff}
+@media(max-width:1024px){.nav-info{display:none}}
 
 /* BUTTONS */
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 2rem;border-radius:8px;font-family:'Urbanist',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:none;position:relative;overflow:hidden;transition:all .3s;text-decoration:none}
 .btn:hover{transform:translateY(-2px)}
-.btn-p{background:var(--red);color:#fff;box-shadow:0 4px 20px rgba(192,30,42,.3)}
+.btn-p{background:var(--red);color:#fff!important;box-shadow:0 4px 20px rgba(192,30,42,.3)}
 .btn-p:hover{background:#a8181f;box-shadow:0 8px 30px rgba(192,30,42,.4)}
 .btn-n{background:var(--navy);color:#fff}
 .btn-n:hover{background:#162d55}
@@ -178,18 +185,28 @@ nav.at-hero .nav-logo img{background:rgba(255,255,255,0.12);backdrop-filter:blur
 .quote-text em{color:rgba(1,154,152,.9);font-style:italic}
 .quote-attr{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4)}
 
-/* CLIENTS */
-#clients{padding:clamp(3.5rem,6vw,5.5rem) 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden}
-.cl-header{text-align:center;padding:0 clamp(1.5rem,5vw,4rem);margin-bottom:2.5rem}
-.cl-title{font-family:'Cormorant Garant',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:600;color:var(--navy)}
-.cl-wrap{position:relative}
-.cl-wrap::before,.cl-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
-.cl-wrap::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
-.cl-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
-.cl-track{display:flex;width:max-content;animation:clScroll 30s linear infinite}
-.cl-item{padding:.5rem 2.5rem;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--border);white-space:nowrap;transition:color .3s}
-.cl-item:hover{color:var(--navy)}
-@keyframes clScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* GOOGLE REVIEWS */
+#reviews{padding:clamp(4rem,7vw,7rem) clamp(1.5rem,5vw,4rem);background:var(--bg2)}
+.rev-head{text-align:center;margin-bottom:3rem}
+.rev-badge{display:inline-flex;align-items:center;gap:.6rem;background:#fff;border:1px solid var(--border);border-radius:50px;padding:.45rem 1.1rem;margin-bottom:1.25rem;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.rev-badge-stars{display:flex;gap:2px}
+.rev-badge-stars svg{width:14px;height:14px;fill:#fbbc04}
+.rev-badge-score{font-size:.78rem;font-weight:700;color:var(--navy)}
+.rev-badge-count{font-size:.72rem;color:var(--muted)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1200px;margin:0 auto}
+.rev-card{background:#fff;border-radius:12px;padding:1.75rem;box-shadow:0 2px 20px rgba(0,0,0,.05);border:1px solid var(--border)}
+.rev-top{display:flex;align-items:center;gap:.85rem;margin-bottom:1rem}
+.rev-av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;color:#fff;flex-shrink:0}
+.rev-meta{flex:1;min-width:0}
+.rev-name{font-weight:600;font-size:.88rem;color:var(--text)}
+.rev-date{font-size:.7rem;color:var(--muted);margin-top:.1rem}
+.rev-stars{display:flex;gap:2px;margin-bottom:.75rem}
+.rev-stars svg{width:15px;height:15px;fill:#fbbc04}
+.rev-text{font-size:.87rem;color:var(--text2);line-height:1.78}
+.rev-footer{display:flex;align-items:center;gap:.4rem;margin-top:1rem;padding-top:.85rem;border-top:1px solid var(--border)}
+.rev-footer span{font-size:.68rem;color:var(--muted);letter-spacing:.04em}
+@media(max-width:1024px){.rev-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.rev-grid{grid-template-columns:1fr}}
 
 /* TICKER */
 .ticker{background:var(--red);overflow:hidden;padding:.8rem 0}
@@ -231,6 +248,13 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
   .hero-cta{flex-direction:column;width:max-content}
 }
 @media(max-width:480px){.stats-bar{grid-template-columns:1fr 1fr}}
+
+  /* Floating contact buttons */
+  .float-btns{position:fixed;bottom:2rem;right:1.5rem;display:flex;flex-direction:column;gap:.75rem;z-index:900}
+  .float-btn{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;color:#fff;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.25);transition:transform .2s,box-shadow .2s}
+  .float-btn:hover{transform:scale(1.12);box-shadow:0 6px 18px rgba(0,0,0,.3)}
+  .float-wa{background:#25d366}
+  .float-ph{background:#0a2342}
 </style>
 <script src="images-config.js" onerror="window.SPRING_IMAGES=window.SPRING_IMAGES||{}"></script>
 </head>
@@ -257,7 +281,13 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
     <li><a href="careers.html">Careers</a></li>
     <li><a href="contact-us.html" class="btn btn-p" style="padding:.55rem 1.4rem;font-size:.7rem">Get a Quote</a></li>
   </ul>
-  <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+  <div class="nav-right">
+    <div class="nav-info">
+      <a href="tel:+971556622949"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 9.81 19.79 19.79 0 011.22 1 2 2 0 013 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+971 556 622 949</a>
+      <a href="mailto:info@springsadvt.com"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@springsadvt.com</a>
+    </div>
+    <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+  </div>
 </nav>
 
 <div class="mob-menu" id="mob">
@@ -274,16 +304,16 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
 
 <!-- HERO -->
 <section id="hero">
-  <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1920&h=1000&fit=crop&q=80" alt="Springs Advertising signage" class="hero-img">
+  <img src="https://images.squarespace-cdn.com/content/v1/5c7976ec11f78465c3ab8a2d/374bf0e1-70cc-4d06-85e7-29668692b586/Dubai_December+12%2C+2025_12374.jpg" alt="Springs Advertising signage" class="hero-img">
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <span class="hero-tag">Est. 1977 · Abu Dhabi, UAE</span>
+    <span class="hero-tag">Est. 1977 · UAE Nationwide</span>
     <h1 class="hero-h">
       Signs That<br>
       Make the<br>
       <em>Right Impression</em>
     </h1>
-    <p class="hero-sub">Design · Manufacture · Install</p>
+    <p class="hero-sub">Design · Fabrication · Install</p>
     <div class="hero-cta">
       <a href="projects.html" class="btn btn-p">View Our Work</a>
       <a href="contact-us.html" class="btn btn-o">Get a Quote</a>
@@ -298,8 +328,8 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
 <!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stat-item rev"><div class="stat-n"><span class="ctr" data-t="47">0</span><em>+</em></div><div class="stat-l">Years</div></div>
-  <div class="stat-item rev d1"><div class="stat-n"><span class="ctr" data-t="500">0</span><em>+</em></div><div class="stat-l">Projects</div></div>
-  <div class="stat-item rev d2"><div class="stat-n"><span class="ctr" data-t="100">0</span><em>+</em></div><div class="stat-l">Clients</div></div>
+  <div class="stat-item rev d1"><div class="stat-n"><span class="ctr" data-t="2000">0</span><em>+</em></div><div class="stat-l">Projects</div></div>
+  <div class="stat-item rev d2"><div class="stat-n"><span class="ctr" data-t="1000">0</span><em>+</em></div><div class="stat-l">Clients</div></div>
   <div class="stat-item rev d3"><div class="stat-n"><span class="ctr" data-t="17">0</span></div><div class="stat-l">Services</div></div>
 </div>
 
@@ -316,9 +346,9 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
     <div class="about-text rv-r">
       <div class="label">Our Story</div>
       <h2 class="about-title">Nearly Five Decades of <em>Craftsmanship</em></h2>
-      <p class="about-desc">Springs Advertising LLC has been creating the right impressions since 1977. Fully equipped, in-house manufactured, and trusted by UAE's most recognised brands.</p>
+      <p class="about-desc">Springs Advertising LLC has been creating the right impressions since 1977. Fully equipped, in-house fabricationd, and trusted by UAE's most recognised brands.</p>
       <div class="about-features">
-        <div class="af rev"><div class="af-dot"></div>In-house design, manufacture & installation</div>
+        <div class="af rev"><div class="af-dot"></div>In-house design, fabrication & installation</div>
         <div class="af rev d1"><div class="af-dot"></div>Premium materials on every project</div>
         <div class="af rev d2"><div class="af-dot"></div>Scheduled maintenance contracts</div>
         <div class="af rev d3"><div class="af-dot"></div>Risk assessments & method statements</div>
@@ -428,20 +458,93 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
   <div class="quote-ov"></div>
   <div class="quote-content">
     <p class="quote-text rev">"We create <em>right impressions</em> through right advertising — turning every surface into a powerful statement."</p>
-    <div class="quote-attr rev d1">— Springs Advertising LLC · Est. 1977 · Abu Dhabi, UAE</div>
+    <div class="quote-attr rev d1">— Springs Advertising LLC · Est. 1977 · UAE Nationwide</div>
   </div>
 </section>
 
-<!-- CLIENTS -->
-<section id="clients">
-  <div class="cl-header">
-    <div class="label" style="justify-content:center">Trusted By</div>
-    <h2 class="cl-title rev">Our Clients</h2>
+<!-- GOOGLE REVIEWS -->
+<section id="reviews">
+  <div class="rev-head">
+    <div class="label" style="justify-content:center">What Clients Say</div>
+    <h2 class="sec-title rev" style="margin-bottom:1rem">Google Reviews</h2>
+    <div class="rev-badge rev d1">
+      <div class="rev-badge-stars">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <span class="rev-badge-score">5.0</span>
+      <span class="rev-badge-count">Based on Google Reviews</span>
+    </div>
   </div>
-  <div class="cl-wrap">
-    <div class="cl-track">
-      <span class="cl-item">Burjeel Medical City</span><span class="cl-item">ADIC</span><span class="cl-item">Aldar Properties</span><span class="cl-item">ADNOC</span><span class="cl-item">LLH Hospital</span><span class="cl-item">FDC</span><span class="cl-item">ADIB</span><span class="cl-item">Asqalan</span><span class="cl-item">Mubadala</span><span class="cl-item">Etihad Airways</span><span class="cl-item">Abu Dhabi Mall</span><span class="cl-item">Ferrari World</span>
-      <span class="cl-item">Burjeel Medical City</span><span class="cl-item">ADIC</span><span class="cl-item">Aldar Properties</span><span class="cl-item">ADNOC</span><span class="cl-item">LLH Hospital</span><span class="cl-item">FDC</span><span class="cl-item">ADIB</span><span class="cl-item">Asqalan</span><span class="cl-item">Mubadala</span><span class="cl-item">Etihad Airways</span><span class="cl-item">Abu Dhabi Mall</span><span class="cl-item">Ferrari World</span>
+  <div class="rev-grid">
+    <!-- Review 1 -->
+    <div class="rev-card rev">
+      <div class="rev-top">
+        <div class="rev-av" style="background:#1c3461">A</div>
+        <div class="rev-meta">
+          <div class="rev-name">Ahmed Al Mansoori</div>
+          <div class="rev-date">2 weeks ago</div>
+        </div>
+      </div>
+      <div class="rev-stars">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <p class="rev-text">"Outstanding quality and professionalism. Springs Advertising delivered our office signage on time and the finish exceeded our expectations. Highly recommend their team."</p>
+      <div class="rev-footer">
+        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        <span>Posted on Google</span>
+      </div>
+    </div>
+    <!-- Review 2 -->
+    <div class="rev-card rev d1">
+      <div class="rev-top">
+        <div class="rev-av" style="background:#019a98">S</div>
+        <div class="rev-meta">
+          <div class="rev-name">Sara Mohammed</div>
+          <div class="rev-date">1 month ago</div>
+        </div>
+      </div>
+      <div class="rev-stars">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <p class="rev-text">"We used Springs for our vehicle fleet branding and the results were spectacular. The team was professional, responsive, and delivered exactly what we envisioned. Will definitely use them again."</p>
+      <div class="rev-footer">
+        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        <span>Posted on Google</span>
+      </div>
+    </div>
+    <!-- Review 3 -->
+    <div class="rev-card rev d2">
+      <div class="rev-top">
+        <div class="rev-av" style="background:#c01e2a">K</div>
+        <div class="rev-meta">
+          <div class="rev-name">Khalid Hassan</div>
+          <div class="rev-date">3 months ago</div>
+        </div>
+      </div>
+      <div class="rev-stars">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <p class="rev-text">"Best signage company in the UAE. They handled our entire building facade from concept to installation. The 3D illuminated letters look incredible at night. True professionals."</p>
+      <div class="rev-footer">
+        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        <span>Posted on Google</span>
+      </div>
     </div>
   </div>
 </section>
@@ -452,7 +555,7 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
       <div class="ft-logo">
         <img src="logo.png" alt="Springs Advertising LLC" style="height:48px;width:auto;object-fit:contain">
       </div>
-      <p class="ft-tagline">Create right impression through right advertising — since 1977.</p>
+      <p class="ft-tagline">Creating the right impression through right advertising — since 1977.</p>
     </div>
     <div>
       <div class="ft-col-h">Navigation</div>
@@ -525,5 +628,20 @@ q('.about-img','idx_about');
 qci('.srv-c',0,'idx_srv_1');qci('.srv-c',1,'idx_srv_2');qci('.srv-c',2,'idx_srv_3');
 qci('.srv-c',3,'idx_srv_4');qci('.srv-c',4,'idx_srv_5');qci('.srv-c',5,'idx_srv_6');})();
 </script>
+
+  <!-- FLOATING CONTACT BUTTONS -->
+  <div class="float-btns">
+    <a class="float-btn float-wa" href="https://wa.me/971556622949" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="26" height="26">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.141 1.535 5.876L.057 23.571a.75.75 0 0 0 .92.92l5.695-1.478A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 0 1-4.953-1.355l-.355-.211-3.683.956.976-3.567-.232-.368A9.713 9.713 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
+      </svg>
+    </a>
+    <a class="float-btn float-ph" href="tel:+971556622949" aria-label="Call us">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+        <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.01 21 3 13.99 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2z"/>
+      </svg>
+    </a>
+  </div>
 </body>
 </html>

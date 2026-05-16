@@ -43,16 +43,21 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(1.5rem,5vw,4rem);height:76px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--border);transition:all .4s ease}
 .nav-logo{display:flex;align-items:center;flex-shrink:0}
 .nav-logo img{height:48px;width:auto;object-fit:contain;display:block}
-.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
+.nav-links{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:2.2rem;list-style:none}
 .nav-links a{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);position:relative;transition:color .3s;font-weight:500}
 .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--red);transition:width .3s}
 .nav-links a:hover,.nav-links a.active{color:var(--red)}
 .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:1.25rem;flex-shrink:0}
+.nav-info{display:flex;align-items:center;gap:1.25rem}
+.nav-info a{font-size:.68rem;color:var(--text2);display:flex;align-items:center;gap:.38rem;transition:color .3s;letter-spacing:.03em;white-space:nowrap}
+.nav-info a:hover{color:var(--red)}
+@media(max-width:1024px){.nav-info{display:none}}
 
 /* BUTTONS */
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 2rem;border-radius:8px;font-family:'Urbanist',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:none;position:relative;overflow:hidden;transition:all .3s;text-decoration:none}
 .btn:hover{transform:translateY(-2px)}
-.btn-p{background:var(--red);color:#fff;box-shadow:0 4px 20px rgba(192,30,42,.3)}
+.btn-p{background:var(--red);color:#fff!important;box-shadow:0 4px 20px rgba(192,30,42,.3)}
 .btn-p:hover{background:#a8181f}
 .btn-n{background:var(--navy);color:#fff}
 .btn-n:hover{background:#162d55}
@@ -175,6 +180,13 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
   .ft-grid{grid-template-columns:1fr}
   .ft-bottom{flex-direction:column;gap:1rem;text-align:center}
 }
+
+  /* Floating contact buttons */
+  .float-btns{position:fixed;bottom:2rem;right:1.5rem;display:flex;flex-direction:column;gap:.75rem;z-index:900}
+  .float-btn{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;color:#fff;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.25);transition:transform .2s,box-shadow .2s}
+  .float-btn:hover{transform:scale(1.12);box-shadow:0 6px 18px rgba(0,0,0,.3)}
+  .float-wa{background:#25d366}
+  .float-ph{background:#0a2342}
 </style>
 </head>
 <body>
@@ -200,7 +212,13 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
     <li><a href="careers.html">Careers</a></li>
     <li><a href="contact-us.html" class="btn btn-p active" style="padding:.55rem 1.4rem;font-size:.7rem">Get a Quote</a></li>
   </ul>
-  <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+  <div class="nav-right">
+    <div class="nav-info">
+      <a href="tel:+971556622949"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 9.81 19.79 19.79 0 011.22 1 2 2 0 013 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+971 556 622 949</a>
+      <a href="mailto:info@springsadvt.com"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@springsadvt.com</a>
+    </div>
+    <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+  </div>
 </nav>
 
 <div class="mob-menu" id="mob">
@@ -247,7 +265,7 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
         </div>
         <div class="info-b">
           <div class="info-b-label">Working Hours</div>
-          <div class="info-b-val">Mon – Fri · 8:00 am – 6:00 pm</div>
+          <div class="info-b-val">Mon – Sat · 8:00 am – 1:00 pm &amp; 2:00 pm – 7:00 pm</div>
         </div>
       </div>
       <div class="info-social">
@@ -318,12 +336,12 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
 <div class="ticker">
   <div class="t-track">
     <span class="t-item">Get a Quote</span><span class="t-item">·</span>
-    <span class="t-item">Abu Dhabi</span><span class="t-item">·</span>
+    <span class="t-item">UAE Nationwide</span><span class="t-item">·</span>
     <span class="t-item">+971 556 622 949</span><span class="t-item">·</span>
     <span class="t-item">info@springsadvt.com</span><span class="t-item">·</span>
     <span class="t-item">Est. 1977</span><span class="t-item">·</span>
     <span class="t-item">Get a Quote</span><span class="t-item">·</span>
-    <span class="t-item">Abu Dhabi</span><span class="t-item">·</span>
+    <span class="t-item">UAE Nationwide</span><span class="t-item">·</span>
     <span class="t-item">+971 556 622 949</span><span class="t-item">·</span>
     <span class="t-item">info@springsadvt.com</span><span class="t-item">·</span>
     <span class="t-item">Est. 1977</span><span class="t-item">·</span>
@@ -346,7 +364,7 @@ footer{background:var(--navy);color:#fff;padding:clamp(3.5rem,6vw,5.5rem) clamp(
           <span class="adv">Advertising LLC</span>
         </div>
       </div>
-      <p class="ft-tagline">Abu Dhabi's trusted signage manufacturer since 1977.</p>
+      <p class="ft-tagline">UAE's trusted signage fabricator since 1977.</p>
     </div>
     <div>
       <div class="ft-col-h">Navigation</div>
@@ -409,5 +427,20 @@ document.getElementById('contact-form').addEventListener('submit',function(e){
   },900);
 });
 </script>
+
+  <!-- FLOATING CONTACT BUTTONS -->
+  <div class="float-btns">
+    <a class="float-btn float-wa" href="https://wa.me/971556622949" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="26" height="26">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.141 1.535 5.876L.057 23.571a.75.75 0 0 0 .92.92l5.695-1.478A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 0 1-4.953-1.355l-.355-.211-3.683.956.976-3.567-.232-.368A9.713 9.713 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
+      </svg>
+    </a>
+    <a class="float-btn float-ph" href="tel:+971556622949" aria-label="Call us">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+        <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.01 21 3 13.99 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2z"/>
+      </svg>
+    </a>
+  </div>
 </body>
 </html>
